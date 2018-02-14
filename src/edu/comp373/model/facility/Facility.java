@@ -21,7 +21,7 @@ public class Facility {
 	}
 	
 	public Location getLocation() { return this.location; }
-	public void setLocation() { this.location = new Location(); }
+	public void setLocation(Location location) { this.location = location; }
 	public String getFacilityInformation() { return ""; }
 	public void setCapacity(Integer size) { this.capacity = size; }
 	public Integer getCapacity() { return this.capacity; }
