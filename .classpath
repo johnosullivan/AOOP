@@ -4,6 +4,8 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="tests"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="/Users/johnosullivan/eclipse-workspace/AOOP/jars/mongodb-driver-3.6.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/johnosullivan/eclipse-workspace/AOOP/jars/mongodb-driver-3.6.3.jar"/>
+	<classpathentry kind="lib" path="/Users/johnosullivan/eclipse-workspace/AOOP/jars/mongodb-driver-core-3.6.3.jar"/>
+	<classpathentry kind="lib" path="/Users/johnosullivan/eclipse-workspace/AOOP/jars/bson-3.6.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
