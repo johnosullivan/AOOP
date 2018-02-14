@@ -14,6 +14,7 @@ public class Facility {
 	private Integer capacity;
 	private String id;
 	private FacilityDAO facilityDAO = new FacilityDAO();
+	private ReservationDAO reservationDAO = new ReservationDAO();
 	
 	private ArrayList<Reservation> reservations = new ArrayList<Reservation>();
 	
@@ -30,6 +31,8 @@ public class Facility {
 		
 		Address addressObj = new Address(address.getString("address"),address.getString("city"),address.getString("state"),address.getString("zip"));
 		this.location = new Location(location.getString("buildingname"),location.getString("room"),addressObj);
+		
+		this.reservations = Reservation.getAllReservation(this.id);
 	}
 	
 	public Facility(final Location location, final Integer capacity) {
@@ -40,14 +43,22 @@ public class Facility {
 	
 	public Location getLocation() { return this.location; }
 	public void setLocation(Location location) { this.location = location; }
+	
 	public String getFacilityInformation() { return ""; }
 	public void setCapacity(Integer size) { this.capacity = size; }
 	public Integer getCapacity() { return this.capacity; }
 	public String getID() { return this.id; }
 	
 	public boolean assignFacilityToUse(final LocalDateTime start,final LocalDateTime end) {
-		reservations.add(new Reservation(start,end,this.id));
+		Reservation res = new Reservation(start,end,this.id);
+		String id = reservationDAO.addReservation(res);
+		res.setID(id);
+		reservations.add(res);
 		return true;
+	}
+	
+	public ArrayList<Reservation> getReservations() {
+		return this.reservations;
 	}
 
 	public boolean isInUseDuringInterval(final LocalDateTime start, final LocalDateTime end) {

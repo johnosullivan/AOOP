@@ -7,6 +7,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 
 import edu.comp373.model.facility.*;
+import edu.comp373.dal.Configs;
 import edu.comp373.dal.facility.*;
 
 
@@ -19,6 +20,8 @@ import com.mongodb.client.MongoCollection;
 
 import org.bson.Document;
 import java.util.Arrays;
+import java.util.Iterator;
+
 import com.mongodb.Block;
 
 import com.mongodb.client.MongoCursor;
@@ -30,6 +33,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FacilityClient {
+	
+	static boolean DEBUGGING = true;
 
 	public static void main(String[] args) {
 		System.out.println("Advanced Object Oriented Programming (OOP)");
@@ -42,9 +47,7 @@ public class FacilityClient {
         
         String ID = facility1.save();
         System.out.println("Facility ID: " + ID);
-        //if (!facilityDAO.addNewFacility(facility1)) { System.out.println("Error Adding Facility"); }
-        
-        
+                
         ArrayList<Facility> list = facilityDAO.listFacilities();
         System.out.println("listFacilities_count: " + list.size());
         
@@ -61,13 +64,27 @@ public class FacilityClient {
         LocalDateTime start_test = LocalDateTime.now().minusHours(4); 
         LocalDateTime end_test = start_test.minusHours(2);
         
+        if (facility1.assignFacilityToUse(start_test,end_test)) { System.out.println("Assigned - In Use"); }
+        
         if (facility1.isInUseDuringInterval(start_test, end_test)) { System.out.println("Facility Is Free"); }
         
         FacilityDAO dao = new FacilityDAO();
         
         Facility facility = new Facility(ID);
         
-        //System.out.println(dao.getFacilityByID(ID));
+        Iterator<Reservation> res = facility.getReservations().iterator();
+        
+        while(res.hasNext()) {
+        		Reservation item = res.next();
+        		System.out.println("Reservation_ID: " + item.getID() + "Facility_ID: " + item.getFacilityID() + " Start: " + item.getStart().toString() + " End: " + item.getEnd().toString());
+        }
+       
+        if (!DEBUGGING) {
+        		MongoClient mongoClient = new MongoClient();
+        		MongoDatabase database = mongoClient.getDatabase(Configs.DB_NAME);
+        		database.drop();
+        		mongoClient.close();
+        }
         
 	}
 	
