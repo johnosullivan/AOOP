@@ -4,6 +4,7 @@ import edu.comp373.dal.facility.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.UUID;
 
 import com.mongodb.BasicDBObject;
@@ -15,6 +16,19 @@ public class Facility {
 	private String id;
 	private FacilityDAO facilityDAO = new FacilityDAO();
 	private ReservationDAO reservationDAO = new ReservationDAO();
+	
+	public enum FeatureType {
+		HAS_STAGE,
+		HAS_PROJECTOR,
+		HAS_HDMI_SUPPORT,
+		HAS_INTERNET,
+		HAS_TV,
+		HAS_WHITEBOARD,
+		HAS_TABLES,
+		HAS_SOUND_SYSTEM
+	}
+	
+	private ArrayList<FeatureType> features = new ArrayList<FeatureType>();
 	
 	private ArrayList<Reservation> reservations = new ArrayList<Reservation>();
 	
@@ -41,10 +55,19 @@ public class Facility {
 		this.id = UUID.randomUUID().toString();
 	}
 	
+	public void addFeatures(FeatureType feature) {
+		features.add(feature);
+	}
+	
 	public Location getLocation() { return this.location; }
 	public void setLocation(Location location) { this.location = location; }
 	
-	public String getFacilityInformation() { return ""; }
+	
+	public String getFacilityInformation() { 
+		Address address = this.getLocation().getAddress();
+		return "Facility: " + location.getBuildingName() + " - " + location.getRoom() + " Capacity: " + this.capacity + "\nAddress: " + address.getAddress() + " " + address.getCity() + ", " + address.getState() + " " + address.getZip(); 
+	}
+	
 	public void setCapacity(Integer size) { this.capacity = size; }
 	public Integer getCapacity() { return this.capacity; }
 	public String getID() { return this.id; }
@@ -55,6 +78,10 @@ public class Facility {
 		res.setID(id);
 		reservations.add(res);
 		return true;
+	}
+	
+	public static ArrayList<Facility> listFacilities() {
+		return FacilityDAO.listFacilities();
 	}
 	
 	public ArrayList<Reservation> getReservations() {
@@ -71,9 +98,28 @@ public class Facility {
 		return available;
 	}
 	
-	public String save() {
+	public String saveFacility() {
 		this.id = facilityDAO.addNewFacility(this);
 		return this.id;
+	}
+	
+	public boolean removeFacility() {
+		facilityDAO.removeFacility(this);
+		reservationDAO.removeReservation(this);
+		return true;
+	}
+	
+	static public ArrayList<Facility> requestAvailableCapacity(Integer capslimit) {
+		ArrayList<Facility> respond = new ArrayList<Facility>();
+		Iterator<Facility> iters = FacilityDAO.listFacilities().iterator();
+		
+		while(iters.hasNext()) {
+			Facility facilityObj = iters.next();
+			if (capslimit <= facilityObj.getCapacity()) {
+				respond.add(facilityObj);
+			}
+		}
+		return respond;
 	}
 	
 	public void update() {

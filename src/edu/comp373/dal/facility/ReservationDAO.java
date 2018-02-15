@@ -15,6 +15,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
 import edu.comp373.dal.Configs;
+import edu.comp373.model.facility.Facility;
 import edu.comp373.model.facility.Reservation;
 
 public class ReservationDAO {
@@ -69,6 +70,28 @@ public class ReservationDAO {
 		mongoClient.close();	
 
 		return temp_reservation;
+	}
+	
+	public boolean removeReservation(Facility facility) {
+		
+		mongoClient = new MongoClient();
+		database = mongoClient.getDatabase(Configs.DB_NAME);
+		collection = database.getCollection(Configs.Reservation_Collection_Name, BasicDBObject.class);
+		
+		FindIterable<BasicDBObject> iterable = collection.find(eq("facility", facility.getID()));		
+		
+		Block<BasicDBObject> delete_block = new Block<BasicDBObject>() {
+		   @Override
+		   public void apply(final BasicDBObject document) {		      
+			   collection.deleteOne(document);
+		   }
+		};
+		
+		iterable.forEach(delete_block);
+		
+		mongoClient.close();	
+		
+		return true;
 	}
 	
 }
