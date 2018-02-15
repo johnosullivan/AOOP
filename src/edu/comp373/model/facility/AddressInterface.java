@@ -1,6 +1,6 @@
 package edu.comp373.model.facility;
 
-interface AddressInterface {
+public interface AddressInterface {
 
 	public String getFullAddress();
 	

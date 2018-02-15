@@ -1,6 +1,6 @@
 package edu.comp373.model.inspections;
 
-interface InspectorInterface {
+public interface InspectorInterface {
 
 	public String getFirstName();
 	

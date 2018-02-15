@@ -1,6 +1,6 @@
 package edu.comp373.model.facility;
 
-interface LocationInterface {
+public interface LocationInterface {
 
 	public String getBuildingName();
 	

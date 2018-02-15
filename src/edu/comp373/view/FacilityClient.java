@@ -6,7 +6,10 @@ import java.util.ArrayList;
 import com.mongodb.MongoClient;
 import edu.comp373.model.facility.*;
 import edu.comp373.model.facility.Facility.DetailType;
+import edu.comp373.model.inspections.Inspection;
 import edu.comp373.model.inspections.Inspector;
+import edu.comp373.model.manager.FacilityManager;
+import edu.comp373.model.reservations.Reservation;
 import edu.comp373.dal.Configs;
 import com.mongodb.client.MongoDatabase;
 import java.util.Iterator;
@@ -15,7 +18,7 @@ import java.util.logging.Level;
 
 public class FacilityClient {
 	
-	static boolean DEBUGGING = true;
+	static boolean DEBUGGING = false;
 
 	public static void main(String[] args) {
 		Logger.getLogger("org.mongodb.driver").setLevel(Level.SEVERE); 
@@ -29,8 +32,10 @@ public class FacilityClient {
         
         String ID = facility1.saveFacility();
         System.out.println("Facility ID: " + ID);
+        
+        FacilityManager facilityManager = new FacilityManager();
                 
-        ArrayList<Facility> list = Facility.listFacilities();
+        ArrayList<Facility> list = facilityManager.listFacilities();
         Iterator<Facility> iters_list = list.iterator();
         System.out.println("listFacilities_count: " + list.size());
         
@@ -39,7 +44,7 @@ public class FacilityClient {
 			System.out.println("Capacity: " + item.getCapacity() + " Location: " + item.getLocation().getBuildingName() + " " + item.getLocation().getRoom() + " Address: " + item.getLocation().getAddress().getFullAddress());
 		}
         
-        ArrayList<Facility> respond = Facility.requestAvailableCapacity(100);
+        ArrayList<Facility> respond = facilityManager.requestAvailableCapacity(100);
         Iterator<Facility> iters = respond.iterator();
         System.out.println("Facility_RequestAvailableCapacity: " + respond.size());
         while(iters.hasNext()) {
@@ -84,7 +89,21 @@ public class FacilityClient {
         System.out.println("Title: " + inspector2.getTitle());
         System.out.println("ID: " + inspector2.getID());
         
-        if(!facility1.removeFacility()) { }
+        Inspection inspection = new Inspection();
+        inspection.setReport("There is a water pipe broken :/");
+        inspection.setInspector(inspector);
+        inspection.setDateTime(LocalDateTime.now());
+        System.out.println("Inspection_ID: " + facility1.addInspection(inspection));
+        
+        Facility facility2 = new Facility(facility1.getID());
+        Iterator<Inspection> inspecs = facility2.listInspections().iterator();
+        while(inspecs.hasNext()) {
+        		Inspection item = inspecs.next();
+        		System.out.println("Inspection_ID: " + item.getID() + "Facility_ID: " + item.getFacility() + " DateTime: " + item.getDateTime().toString() + " Report: " + item.getReport());
+        }
+        
+        
+        //if(!facility1.removeFacility()) { }
        
         if (!DEBUGGING) {
         		MongoClient mongoClient = new MongoClient();

@@ -1,9 +1,9 @@
-package edu.comp373.model.facility;
+package edu.comp373.model.reservations;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import edu.comp373.dal.facility.ReservationDAO;
+import edu.comp373.dal.reservations.ReservationDAO;
 
 public class Reservation implements ReservationInterface {
 

@@ -5,8 +5,10 @@ import java.util.ArrayList;
 
 import edu.comp373.model.facility.Facility.DetailType;
 import edu.comp373.model.facility.Facility.FeatureType;
+import edu.comp373.model.inspections.Inspection;
+import edu.comp373.model.reservations.Reservation;
 
-interface FacilityInterface {
+public interface FacilityInterface {
 
 	public void addFacilityDetail(DetailType type,Object obj);
 	
@@ -26,10 +28,6 @@ interface FacilityInterface {
 	
 	public boolean assignFacilityToUse(final LocalDateTime start,final LocalDateTime end);
 	
-	static public ArrayList<Facility> listFacilities() {
-		return null;
-	}
-	
 	public ArrayList<Reservation> getReservations();
 
 	public boolean isInUseDuringInterval(final LocalDateTime start, final LocalDateTime end);
@@ -38,14 +36,10 @@ interface FacilityInterface {
 	
 	public boolean removeFacility();
 	
-	static public ArrayList<Facility> requestAvailableCapacity(Integer capslimit) {
-		return null;
-	}
-	
-	static public ArrayList<Facility> vacateFacility() {
-		return null;
-	}
-	
 	public void update();
+	
+	public ArrayList<Inspection> listInspections();
+	
+	public String addInspection(Inspection inspection);
 	
 }

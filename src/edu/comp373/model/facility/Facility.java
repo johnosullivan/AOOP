@@ -1,10 +1,13 @@
 package edu.comp373.model.facility;
 
 import edu.comp373.dal.facility.*;
+import edu.comp373.dal.inspections.InspectionDAO;
+import edu.comp373.dal.reservations.ReservationDAO;
+import edu.comp373.model.inspections.Inspection;
+import edu.comp373.model.reservations.Reservation;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.UUID;
 
 import com.mongodb.BasicDBObject;
@@ -14,8 +17,10 @@ public class Facility implements FacilityInterface {
 	private Location location;
 	private Integer capacity;
 	private String id;
+	
 	private FacilityDAO facilityDAO = new FacilityDAO();
 	private ReservationDAO reservationDAO = new ReservationDAO();
+	private InspectionDAO inspectionDAO = new InspectionDAO();
 	
 	public enum FeatureType {
 		HAS_STAGE,
@@ -39,8 +44,8 @@ public class Facility implements FacilityInterface {
 	}
 	
 	private ArrayList<FeatureType> features = new ArrayList<FeatureType>();
-	
 	private ArrayList<Reservation> reservations = new ArrayList<Reservation>();
+	private ArrayList<Inspection> inspections = new ArrayList<Inspection>();
 	
 	public Facility() { }
 	
@@ -56,7 +61,8 @@ public class Facility implements FacilityInterface {
 		Address addressObj = new Address(address.getString("address"),address.getString("city"),address.getString("state"),address.getString("zip"));
 		this.location = new Location(location.getString("buildingname"),location.getString("room"),addressObj);
 		
-		this.reservations = Reservation.getAllReservation(this.id);
+		this.reservations = reservationDAO.getAllReservations(this.id);
+		this.inspections = inspectionDAO.getAllInspections(this.id);
 	}
 	
 	public Facility(final Location location, final Integer capacity) {
@@ -100,14 +106,21 @@ public class Facility implements FacilityInterface {
 		return true;
 	}
 	
-	public static ArrayList<Facility> listFacilities() {
-		return FacilityDAO.listFacilities();
-	}
-	
 	public ArrayList<Reservation> getReservations() {
 		return this.reservations;
 	}
-
+	
+	public ArrayList<Inspection> listInspections() {		
+		return this.inspections;
+	}
+	
+	public String addInspection(Inspection inspection) {
+		inspection.setFacility(this.id);
+		String idInspection = inspection.saveInspection();
+		this.inspections.add(inspection);
+;		return idInspection;
+	}
+	
 	public boolean isInUseDuringInterval(final LocalDateTime start, final LocalDateTime end) {
 		boolean available = true; 
 		for (int x = 0; x > this.reservations.size(); x++) {
@@ -129,25 +142,7 @@ public class Facility implements FacilityInterface {
 		return true;
 	}
 	
-	static public ArrayList<Facility> requestAvailableCapacity(Integer capslimit) {
-		ArrayList<Facility> respond = new ArrayList<Facility>();
-		Iterator<Facility> iters = FacilityDAO.listFacilities().iterator();
-		
-		while(iters.hasNext()) {
-			Facility facilityObj = iters.next();
-			if (capslimit <= facilityObj.getCapacity()) {
-				respond.add(facilityObj);
-			}
-		}
-		return respond;
-	}
-	
-	static public ArrayList<Facility> vacateFacility() {
-		ArrayList<Facility> respond = new ArrayList<Facility>();
-		
-		return respond;
-	}
-	
+
 	public void update() {
 		
 	}

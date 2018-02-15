@@ -1,9 +1,9 @@
-package edu.comp373.model.facility;
+package edu.comp373.model.reservations;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-interface ReservationInterface {
+public interface ReservationInterface {
 
 	public LocalDateTime getStart();
 	

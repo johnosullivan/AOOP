@@ -1,4 +1,4 @@
-package edu.comp373.dal.facility;
+package edu.comp373.dal.reservations;
 
 import static com.mongodb.client.model.Filters.eq;
 
@@ -16,7 +16,7 @@ import com.mongodb.client.MongoDatabase;
 
 import edu.comp373.dal.Configs;
 import edu.comp373.model.facility.Facility;
-import edu.comp373.model.facility.Reservation;
+import edu.comp373.model.reservations.Reservation;
 
 public class ReservationDAO {
 
