@@ -9,7 +9,7 @@ import java.util.UUID;
 
 import com.mongodb.BasicDBObject;
 
-public class Facility {
+public class Facility implements FacilityInterface {
 
 	private Location location;
 	private Integer capacity;
@@ -26,6 +26,16 @@ public class Facility {
 		HAS_WHITEBOARD,
 		HAS_TABLES,
 		HAS_SOUND_SYSTEM
+	}
+	
+	public enum DetailType {
+		CAPACITY,
+		LOCATION_BUILDING,
+		LOCATION_ROOM,
+		ADDRESS_ADDRESS,
+		ADDRESS_CITY,
+		ADDRESS_STATE,
+		ADSRESS_ZIP
 	}
 	
 	private ArrayList<FeatureType> features = new ArrayList<FeatureType>();
@@ -53,6 +63,16 @@ public class Facility {
 		this.location = location;
 		this.capacity = capacity;
 		this.id = UUID.randomUUID().toString();
+	}
+	
+	public void addFacilityDetail(DetailType type,Object obj) {
+		switch (type) {
+        		case CAPACITY: 
+        			this.setCapacity((Integer)obj);
+        			break;
+        		default:
+        			break;
+		}
 	}
 	
 	public void addFeatures(FeatureType feature) {

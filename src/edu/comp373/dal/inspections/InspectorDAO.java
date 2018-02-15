@@ -2,13 +2,9 @@ package edu.comp373.dal.inspections;
 
 import static com.mongodb.client.model.Filters.eq;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-
 import org.bson.types.ObjectId;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.Block;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;

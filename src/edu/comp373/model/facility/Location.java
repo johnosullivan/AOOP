@@ -1,6 +1,6 @@
 package edu.comp373.model.facility;
 
-public class Location {
+public class Location implements LocationInterface {
 	/* Location object extends the facility with the building name/location and room name */
 	private String building_name;
 	private String room_name;

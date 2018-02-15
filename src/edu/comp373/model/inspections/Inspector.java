@@ -4,7 +4,7 @@ import com.mongodb.BasicDBObject;
 
 import edu.comp373.dal.inspections.InspectorDAO;
 
-public class Inspector {
+public class Inspector implements InspectorInterface {
 
 	private String firstName;
 	private String middleName;

@@ -1,6 +1,6 @@
 package edu.comp373.model.facility;
 
-public class Address {
+public class Address implements AddressInterface {
 
 	private String address;
 	private String city;

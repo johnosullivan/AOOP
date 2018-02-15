@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import edu.comp373.dal.facility.ReservationDAO;
 
-public class Reservation {
+public class Reservation implements ReservationInterface {
 
 	private LocalDateTime start;
 	private LocalDateTime end;

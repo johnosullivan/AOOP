@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.mongodb.MongoClient;
 import edu.comp373.model.facility.*;
+import edu.comp373.model.facility.Facility.DetailType;
 import edu.comp373.model.inspections.Inspector;
 import edu.comp373.dal.Configs;
 import com.mongodb.client.MongoDatabase;
@@ -24,6 +25,7 @@ public class FacilityClient {
         Address address1 = new Address("40 E Oak Street","Chicago","IL","60091");
         Location location1 = new Location("Damen Student Center","RM 345",address1);
         Facility facility1 = new Facility(location1,125);
+        facility1.addFacilityDetail(DetailType.CAPACITY, 120);
         
         String ID = facility1.saveFacility();
         System.out.println("Facility ID: " + ID);
