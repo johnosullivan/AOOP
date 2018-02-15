@@ -4,4 +4,5 @@ public class Configs {
 	static public String DB_NAME = "AOOP";
 	static public String Facility_Collection_Name = "facility";
 	static public String Reservation_Collection_Name = "reservation";
+	static public String Inspector_Collection_Name = "inspector";
 }

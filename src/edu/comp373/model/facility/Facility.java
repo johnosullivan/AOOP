@@ -122,6 +122,12 @@ public class Facility {
 		return respond;
 	}
 	
+	static public ArrayList<Facility> vacateFacility() {
+		ArrayList<Facility> respond = new ArrayList<Facility>();
+		
+		return respond;
+	}
+	
 	public void update() {
 		
 	}

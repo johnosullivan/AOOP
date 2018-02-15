@@ -16,15 +16,14 @@ import com.mongodb.client.MongoDatabase;
 
 public class FacilityDAO {
 	
-	private ArrayList<Facility> allFacility = new ArrayList<Facility>();
+	//private ArrayList<Facility> allFacility = new ArrayList<Facility>();
 	//private Map<String, Facility> keyToFacility = new TreeMap<String, Facility>();
 		
 	MongoClient mongoClient;
 	MongoCollection<BasicDBObject> collection;
 	MongoDatabase database;
 	
-	public FacilityDAO() { 
-
+	public FacilityDAO() {  
 	}
 	
 	static public ArrayList<Facility> listFacilities() { 

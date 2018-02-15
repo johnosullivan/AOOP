@@ -5,16 +5,20 @@ import java.util.ArrayList;
 
 import com.mongodb.MongoClient;
 import edu.comp373.model.facility.*;
+import edu.comp373.model.inspections.Inspector;
 import edu.comp373.dal.Configs;
 import com.mongodb.client.MongoDatabase;
 import java.util.Iterator;
-
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class FacilityClient {
 	
 	static boolean DEBUGGING = true;
 
 	public static void main(String[] args) {
+		Logger.getLogger("org.mongodb.driver").setLevel(Level.SEVERE); 
+		
 		System.out.println("Advanced Object Oriented Programming (OOP)");
                 
         Address address1 = new Address("40 E Oak Street","Chicago","IL","60091");
@@ -68,6 +72,15 @@ public class FacilityClient {
         }
         
         System.out.println("Facility Information: " + facility1.getFacilityInformation());
+        
+        Inspector inspector = new Inspector("John","Nikolas","O'Sullivan","Mr.");
+        String in_id = inspector.addInspector();
+        Inspector inspector2 = new Inspector(in_id);
+        System.out.println("FirstName: " + inspector2.getFirstName());
+        System.out.println("MiddleName: " + inspector2.getMiddleName());
+        System.out.println("LastName: " + inspector2.getLastName());
+        System.out.println("Title: " + inspector2.getTitle());
+        System.out.println("ID: " + inspector2.getID());
         
         if(!facility1.removeFacility()) { }
        
