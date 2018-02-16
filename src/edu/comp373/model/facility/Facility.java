@@ -71,7 +71,7 @@ public class Facility implements FacilityInterface {
 		this.id = UUID.randomUUID().toString();
 	}
 	
-	public void addFacilityDetail(DetailType type,Object obj) {
+	public void addDetail(DetailType type,Object obj) {
 		switch (type) {
         		case CAPACITY: 
         			this.setCapacity((Integer)obj);
@@ -131,15 +131,19 @@ public class Facility implements FacilityInterface {
 		return available;
 	}
 	
-	public String saveFacility() {
+	public String save() {
 		this.id = facilityDAO.addNewFacility(this);
 		return this.id;
 	}
 	
-	public boolean removeFacility() {
+	public boolean remove() {
 		facilityDAO.removeFacility(this);
 		reservationDAO.removeReservation(this);
 		return true;
+	}
+	
+	public void setID(final String id) {
+		this.id = id;
 	}
 	
 

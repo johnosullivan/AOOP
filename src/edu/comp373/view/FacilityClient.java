@@ -20,7 +20,7 @@ import java.util.logging.Level;
 
 public class FacilityClient {
 	
-	static boolean DEBUGGING = true;
+	static boolean DEBUGGING = false;
 
 	public static void main(String[] args) {
 		Logger.getLogger("org.mongodb.driver").setLevel(Level.SEVERE); 
@@ -30,9 +30,9 @@ public class FacilityClient {
         Address address1 = new Address("40 E Oak Street","Chicago","IL","60091");
         Location location1 = new Location("Damen Student Center","RM 345",address1);
         Facility facility1 = new Facility(location1,125);
-        facility1.addFacilityDetail(DetailType.CAPACITY, 120);
+        facility1.addDetail(DetailType.CAPACITY, 120);
         
-        String ID = facility1.saveFacility();
+        String ID = facility1.save();
         System.out.println("Facility ID: " + ID);
         
         FacilityManager facilityManager = new FacilityManager();

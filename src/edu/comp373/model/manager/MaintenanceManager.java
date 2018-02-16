@@ -15,7 +15,7 @@ public class MaintenanceManager implements MaintenanceManagerInterface {
 		return true;
 	}
 	
-	public boolean scheduleMaintenance() {
+	public boolean scheduleMaintenance(MaintenanceRequest maintenance) {
 		return true;
 	}
 	

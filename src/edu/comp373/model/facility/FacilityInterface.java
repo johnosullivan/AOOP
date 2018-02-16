@@ -10,7 +10,7 @@ import edu.comp373.model.reservations.Reservation;
 
 public interface FacilityInterface {
 
-	public void addFacilityDetail(DetailType type,Object obj);
+	public void addDetail(DetailType type,Object obj);
 	
 	public void addFeatures(FeatureType feature);
 	
@@ -32,9 +32,9 @@ public interface FacilityInterface {
 
 	public boolean isInUseDuringInterval(final LocalDateTime start, final LocalDateTime end);
 	
-	public String saveFacility();
+	public String save();
 	
-	public boolean removeFacility();
+	public boolean remove();
 	
 	public void update();
 	

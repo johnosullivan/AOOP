@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import edu.comp373.dal.facility.FacilityDAO;
 import edu.comp373.model.facility.Facility;
+import edu.comp373.model.facility.Facility.DetailType;
 
 public class FacilityManager implements FacilityManagerInterface {
 
@@ -33,6 +34,20 @@ public class FacilityManager implements FacilityManagerInterface {
 		ArrayList<Facility> respond = new ArrayList<Facility>();
 		
 		return respond;
+	}
+	
+	public Facility addNewFacility(Facility facility) {
+		String id = facility.save();
+		facility.setID(id);
+		return facility;
+	}
+	
+	public void addFacilityDetail(Facility facility, DetailType type,Object obj) {
+		facility.addDetail(type, obj);
+	}
+	
+	public boolean removeFacility(Facility facility) {
+		return facility.remove();
 	}
 	
 }
