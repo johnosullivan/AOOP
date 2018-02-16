@@ -11,7 +11,9 @@ public class MaintenanceRequest implements MaintenanceRequestInterface {
 	private String problem;
 	private String id;
 	private MaintenanceStatus status;
-	private LocalDateTime datetime;
+	private LocalDateTime start_datetime;
+	private LocalDateTime end_datetime;
+	private Double cost;
 	
 	private MaintenanceDAO maintenanceDAO = new MaintenanceDAO();
 	
@@ -27,20 +29,24 @@ public class MaintenanceRequest implements MaintenanceRequestInterface {
 	
 	}
 	
-	public MaintenanceRequest(final Facility facility, final String problem, final LocalDateTime datetime) {
+	public MaintenanceRequest(final Facility facility, final String problem, final LocalDateTime start_datetime, final LocalDateTime end_datetime,final Double cost) {
 		this.facility = facility;
 		this.problem = problem;
 		this.id = "";
 		this.status = MaintenanceStatus.PENDING;
-		this.datetime = datetime;
+		this.start_datetime = start_datetime;
+		this.end_datetime = end_datetime;
+		this.cost = cost;
 	}
 	
-	public MaintenanceRequest(final Facility facility, final String problem, final LocalDateTime datetime, final String id) {
+	public MaintenanceRequest(final Facility facility, final String problem, final LocalDateTime start_datetime, final LocalDateTime end_datetime, final Double cost, final String id) {
 		this.facility = facility;
 		this.problem = problem;
 		this.id = id;
 		this.status = MaintenanceStatus.PENDING;
-		this.datetime = datetime;
+		this.start_datetime = start_datetime;
+		this.end_datetime = end_datetime;
+		this.cost = cost;
 	}
 	
 	public Integer maintenanceStatusToInt() {
@@ -88,6 +94,14 @@ public class MaintenanceRequest implements MaintenanceRequestInterface {
 		this.id = id;
 	}
 	
+	public Double getCost() {
+		return this.cost;
+	}
+	
+	public void setCost(final Double cost) {
+		this.cost = cost;
+	}
+	
 	public MaintenanceStatus getStatus() {
 		return this.status;
 	}
@@ -101,12 +115,20 @@ public class MaintenanceRequest implements MaintenanceRequestInterface {
 		return this.id;
 	}
 	
-	public void setDateTime(final LocalDateTime datetime) {
-		this.datetime = datetime;
+	public void setEndDateTime(final LocalDateTime end_datetime) {
+		this.end_datetime = end_datetime;
 	}
 
-	public LocalDateTime getDateTime() {
-		return this.datetime;
+	public LocalDateTime getEndDateTime() {
+		return this.end_datetime;
+	}
+	
+	public void setStartDateTime(final LocalDateTime start_datetime) {
+		this.start_datetime = start_datetime;
+	}
+
+	public LocalDateTime getStartDateTime() {
+		return this.start_datetime;
 	}
 
 }

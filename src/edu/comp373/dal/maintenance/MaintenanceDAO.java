@@ -35,7 +35,7 @@ public class MaintenanceDAO {
 		case COMPLETED: return 4;
 		case PROBLEM: return 5;
 		default: return 1;
-		}
+		} 
 	}
 	
 	public String addMaintenanceRequest(MaintenanceRequest maintenanceRequest) {
@@ -48,8 +48,10 @@ public class MaintenanceDAO {
 		maintenancerequestObj.append("facility", maintenanceRequest.getFacility().getID());
 		maintenancerequestObj.append("problem", maintenanceRequest.getProblem());
 		maintenancerequestObj.append("status", maintenanceRequest.maintenanceStatusToInt());
-		maintenancerequestObj.append("datetime", maintenanceRequest.getDateTime().toString());
-
+		maintenancerequestObj.append("startdatetime", maintenanceRequest.getStartDateTime().toString());
+		maintenancerequestObj.append("enddatetime", maintenanceRequest.getEndDateTime().toString());
+		maintenancerequestObj.append("cost", maintenanceRequest.getCost());
+		
 		collection.insertOne(maintenancerequestObj);
 		mongoClient.close();	
 		
@@ -72,8 +74,41 @@ public class MaintenanceDAO {
 			   res.add(new MaintenanceRequest(
 					 new Facility((String)document.get("facility")),
 					 (String)document.get("problem"),
-					 LocalDateTime.parse((CharSequence) document.get("datetime")),
-					 "" + document.getInt("_id")
+					 LocalDateTime.parse((CharSequence) document.get("startdatetime")),
+					 LocalDateTime.parse((CharSequence) document.get("enddatetime")),
+					 (Double)document.get("cost"),
+					 "" + document.get("_id")
+			   ));
+		   }
+		};
+		
+		iterable.forEach(insert_block);
+		
+		mongoClient.close();	
+		
+		return res;
+	}
+	
+	public ArrayList<MaintenanceRequest> getMaintenanceRequestsForFacility(Facility facility) {
+		
+		ArrayList<MaintenanceRequest> res = new ArrayList<MaintenanceRequest>();
+		
+		mongoClient = new MongoClient();
+		database = mongoClient.getDatabase(Configs.DB_NAME);
+		collection = database.getCollection(Configs.MaintenanceRequest_Collection_Name, BasicDBObject.class);
+		
+		FindIterable<BasicDBObject> iterable = collection.find(eq("facility", facility.getID()));		
+		
+		Block<BasicDBObject> insert_block = new Block<BasicDBObject>() {
+		   @Override
+		   public void apply(final BasicDBObject document) {		      
+			   res.add(new MaintenanceRequest(
+					 new Facility((String)document.get("facility")),
+					 (String)document.get("problem"),
+					 LocalDateTime.parse((CharSequence) document.get("startdatetime")),
+					 LocalDateTime.parse((CharSequence) document.get("enddatetime")),
+					 (Double)document.get("cost"),
+					 "" + document.get("_id")
 			   ));
 		   }
 		};

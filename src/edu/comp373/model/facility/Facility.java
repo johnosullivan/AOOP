@@ -210,4 +210,8 @@ public class Facility implements FacilityInterface {
 		
 	}
 	
+	public ArrayList<Reservation> getAllReservation() {
+		return this.reservations;
+	}
+	
 }

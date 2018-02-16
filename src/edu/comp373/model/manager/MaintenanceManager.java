@@ -1,6 +1,7 @@
 package edu.comp373.model.manager;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import edu.comp373.dal.maintenance.MaintenanceDAO;
 import edu.comp373.model.facility.Facility;
@@ -27,7 +28,17 @@ public class MaintenanceManager implements MaintenanceManagerInterface {
 	}
 	
 	public Double calcMaintenanceCostForFacility(Facility facility) {
-		return 0.0;
+		Double totalcost = 0.0;
+		
+		Iterator<MaintenanceRequest> list = maintenanceDAO.getMaintenanceRequestsForFacility(facility).iterator();
+		
+		while(list.hasNext()) {
+			MaintenanceRequest item = list.next();
+			totalcost = totalcost + item.getCost();
+		}
+		
+		
+		return totalcost;
 	}
 	
 	public Double calcProblemRateForFacility(Facility facility) {
@@ -35,7 +46,7 @@ public class MaintenanceManager implements MaintenanceManagerInterface {
 	}
 	
 	public Double calcDownTimeForFacility(Facility facility) {
-		return 0.0;
+		return 0.0; 
 	}
 	
 	public ArrayList<MaintenanceRequest> listMaintRequests() {

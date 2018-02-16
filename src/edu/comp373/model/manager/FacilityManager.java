@@ -34,7 +34,7 @@ public class FacilityManager implements FacilityManagerInterface {
 			}
 		}
 		return respond;
-	}
+	} 
 	
 	public ArrayList<Facility> vacateFacility() {
 		ArrayList<Facility> respond = new ArrayList<Facility>();
@@ -56,8 +56,8 @@ public class FacilityManager implements FacilityManagerInterface {
 		return facility.remove();
 	}
 	
-	public ArrayList<Reservation> getAllReservation(String id) {
-		return reservationDAO.getAllReservations(id);
+	public ArrayList<Reservation> getAllReservation(Facility facility) {
+		return reservationDAO.getAllReservations(facility.getID());
 	}
 	
 }

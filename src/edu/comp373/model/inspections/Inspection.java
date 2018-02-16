@@ -102,7 +102,8 @@ public class Inspection implements InspectionInterface {
 	 * @see edu.comp373.model.inspections.InspectionInterface#saveInspection()
 	 */
 	public String saveInspection() {
-		return inspectionDAO.addInspection(this);
+		this.id = inspectionDAO.addInspection(this);
+		return this.id;
 	}
 	/*
 	 * (non-Javadoc) Sets the LocalDateTime for the inspection
