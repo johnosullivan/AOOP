@@ -8,6 +8,8 @@ import edu.comp373.model.facility.*;
 import edu.comp373.model.facility.Facility.DetailType;
 import edu.comp373.model.inspections.Inspection;
 import edu.comp373.model.inspections.Inspector;
+import edu.comp373.model.maintenance.MaintenanceRequest;
+import edu.comp373.model.maintenance.MaintenanceRequest.MaintenanceStatus;
 import edu.comp373.model.manager.FacilityManager;
 import edu.comp373.model.reservations.Reservation;
 import edu.comp373.dal.Configs;
@@ -18,7 +20,7 @@ import java.util.logging.Level;
 
 public class FacilityClient {
 	
-	static boolean DEBUGGING = false;
+	static boolean DEBUGGING = true;
 
 	public static void main(String[] args) {
 		Logger.getLogger("org.mongodb.driver").setLevel(Level.SEVERE); 
@@ -101,6 +103,13 @@ public class FacilityClient {
         		Inspection item = inspecs.next();
         		System.out.println("Inspection_ID: " + item.getID() + "Facility_ID: " + item.getFacility() + " DateTime: " + item.getDateTime().toString() + " Report: " + item.getReport());
         }
+       
+        MaintenanceRequest maintenanceRequest = new MaintenanceRequest();
+        maintenanceRequest.setFacility(facility2);
+        maintenanceRequest.setProblem("Fix the broken pipe in the den");
+        maintenanceRequest.setStatus(MaintenanceStatus.PENDING);
+        maintenanceRequest.setDateTime(LocalDateTime.now());
+        System.out.println("MaintenanceRequest_ID: " + maintenanceRequest.saveMaintenanceRequest());
         
         
         //if(!facility1.removeFacility()) { }
