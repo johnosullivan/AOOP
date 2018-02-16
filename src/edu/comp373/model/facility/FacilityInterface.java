@@ -42,4 +42,6 @@ public interface FacilityInterface {
 	
 	public String addInspection(Inspection inspection);
 	
+	public void setID(final String id);
+	
 }

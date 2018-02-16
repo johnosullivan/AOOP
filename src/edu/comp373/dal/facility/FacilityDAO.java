@@ -26,7 +26,7 @@ public class FacilityDAO {
 	public FacilityDAO() {  
 	}
 	
-	static public ArrayList<Facility> listFacilities() { 
+	public ArrayList<Facility> listFacilities() { 
 		ArrayList<Facility> all = new ArrayList<Facility>();
 		
 		MongoClient mongoClient = new MongoClient();

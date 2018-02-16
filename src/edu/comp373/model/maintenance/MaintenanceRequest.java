@@ -97,7 +97,8 @@ public class MaintenanceRequest implements MaintenanceRequestInterface {
 	}
 	
 	public String saveMaintenanceRequest() {
-		return maintenanceDAO.addMaintenanceRequest(this);
+		this.id = maintenanceDAO.addMaintenanceRequest(this);
+		return this.id;
 	}
 	
 	public void setDateTime(final LocalDateTime datetime) {

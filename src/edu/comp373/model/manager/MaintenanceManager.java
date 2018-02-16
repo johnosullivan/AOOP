@@ -2,16 +2,23 @@ package edu.comp373.model.manager;
 
 import java.util.ArrayList;
 
+import edu.comp373.dal.maintenance.MaintenanceDAO;
 import edu.comp373.model.facility.Facility;
 import edu.comp373.model.maintenance.MaintenanceRequest;
+import edu.comp373.model.maintenance.MaintenanceRequest.MaintenanceStatus;
 
 public class MaintenanceManager implements MaintenanceManagerInterface {
+	
+	private MaintenanceDAO maintenanceDAO = new MaintenanceDAO();
 	
 	public MaintenanceManager() {
 		
 	}
 
 	public boolean makeFacilityMaintRequest(MaintenanceRequest maintenance) {
+		if (maintenance.saveMaintenanceRequest().equals("")) {
+			return false;
+		}
 		return true;
 	}
 	
@@ -32,15 +39,15 @@ public class MaintenanceManager implements MaintenanceManagerInterface {
 	}
 	
 	public ArrayList<MaintenanceRequest> listMaintRequests() {
-		return new ArrayList<MaintenanceRequest>();
+		return maintenanceDAO.getMaintenanceRequest(MaintenanceStatus.PROCESSED);
 	}
 	
 	public ArrayList<MaintenanceRequest> listMaintenance() {
-		return new ArrayList<MaintenanceRequest>();
+		return maintenanceDAO.getMaintenanceRequest(MaintenanceStatus.COMPLETED);
 	}
 	
 	public ArrayList<MaintenanceRequest> listFacilityProblems() {
-		return new ArrayList<MaintenanceRequest>();
+		return maintenanceDAO.getMaintenanceRequest(MaintenanceStatus.PROBLEM);
 	}
 	
 }

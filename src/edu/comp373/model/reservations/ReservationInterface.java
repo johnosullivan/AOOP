@@ -1,7 +1,6 @@
 package edu.comp373.model.reservations;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 public interface ReservationInterface {
 
@@ -14,9 +13,5 @@ public interface ReservationInterface {
 	public String getID();
 	
 	public void setID(String id);
-	
-	public static ArrayList<Reservation> getAllReservation(String id) {
-		return null;
-	}
 	
 }

@@ -4,22 +4,28 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import edu.comp373.dal.facility.FacilityDAO;
+import edu.comp373.dal.reservations.ReservationDAO;
 import edu.comp373.model.facility.Facility;
 import edu.comp373.model.facility.Facility.DetailType;
+import edu.comp373.model.reservations.Reservation;
 
 public class FacilityManager implements FacilityManagerInterface {
 
+	/* Reservation Data Access Object */
+	private ReservationDAO reservationDAO = new ReservationDAO();
+	private FacilityDAO facilityDAO = new FacilityDAO();
+	
 	public FacilityManager() {
 		
 	}
 	
 	public ArrayList<Facility> listFacilities() {
-		return FacilityDAO.listFacilities();
+		return facilityDAO.listFacilities();
 	}
 	
 	public ArrayList<Facility> requestAvailableCapacity(Integer capslimit) {
 		ArrayList<Facility> respond = new ArrayList<Facility>();
-		Iterator<Facility> iters = FacilityDAO.listFacilities().iterator();
+		Iterator<Facility> iters = facilityDAO.listFacilities().iterator();
 		
 		while(iters.hasNext()) {
 			Facility facilityObj = iters.next();
@@ -48,6 +54,10 @@ public class FacilityManager implements FacilityManagerInterface {
 	
 	public boolean removeFacility(Facility facility) {
 		return facility.remove();
+	}
+	
+	public ArrayList<Reservation> getAllReservation(String id) {
+		return reservationDAO.getAllReservations(id);
 	}
 	
 }

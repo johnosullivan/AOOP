@@ -16,12 +16,34 @@ public class Location implements LocationInterface {
 		this.address = address;
 	}
 	
-	/* Getter/Setters for the location object */
+	/*
+	 * (non-Javadoc) Gets the buidling name the facility is located in 
+	 * @see edu.comp373.model.facility.LocationInterface#getBuildingName()
+	 */
 	public String getBuildingName() { return this.building_name; }
+	/*
+	 * (non-Javadoc) Sets the buidling name the facility located in
+	 * @see edu.comp373.model.facility.LocationInterface#setBuidlingName(java.lang.String)
+	 */
 	public void setBuidlingName(final String buildingname) { this.building_name = buildingname; }
+	/*
+	 * (non-Javadoc) Gets the room location in building
+	 * @see edu.comp373.model.facility.LocationInterface#getRoom()
+	 */
 	public String getRoom() { return this.room_name; }
+	/*
+	 * (non-Javadoc) Sets the room name for the facility in building 
+	 * @see edu.comp373.model.facility.LocationInterface#setRoomName(java.lang.String)
+	 */
 	public void setRoomName(final String roomname) { this.room_name = roomname; }
-	
+	/*
+	 * (non-Javadoc) Gets the Address Object
+	 * @see edu.comp373.model.facility.LocationInterface#getAddress()
+	 */
 	public Address getAddress() { return this.address; }
+	/*
+	 * (non-Javadoc) Sets the Address Object
+	 * @see edu.comp373.model.facility.LocationInterface#setAddress(edu.comp373.model.facility.Address)
+	 */
 	public void setAddress(final Address address) { this.address = address; }
 }
