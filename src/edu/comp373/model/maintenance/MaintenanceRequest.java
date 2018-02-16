@@ -29,21 +29,21 @@ public class MaintenanceRequest implements MaintenanceRequestInterface {
 	
 	}
 	
-	public MaintenanceRequest(final Facility facility, final String problem, final LocalDateTime start_datetime, final LocalDateTime end_datetime,final Double cost) {
+	public MaintenanceRequest(final Facility facility, final String problem, final LocalDateTime start_datetime, final LocalDateTime end_datetime,final Double cost, final MaintenanceStatus status) {
 		this.facility = facility;
 		this.problem = problem;
 		this.id = "";
-		this.status = MaintenanceStatus.PENDING;
+		this.status = status;
 		this.start_datetime = start_datetime;
 		this.end_datetime = end_datetime;
 		this.cost = cost;
 	}
 	
-	public MaintenanceRequest(final Facility facility, final String problem, final LocalDateTime start_datetime, final LocalDateTime end_datetime, final Double cost, final String id) {
+	public MaintenanceRequest(final Facility facility, final String problem, final LocalDateTime start_datetime, final LocalDateTime end_datetime, final Double cost, final MaintenanceStatus status, final String id) {
 		this.facility = facility;
 		this.problem = problem;
 		this.id = id;
-		this.status = MaintenanceStatus.PENDING;
+		this.status = status;
 		this.start_datetime = start_datetime;
 		this.end_datetime = end_datetime;
 		this.cost = cost;

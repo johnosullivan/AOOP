@@ -38,6 +38,17 @@ public class MaintenanceDAO {
 		} 
 	}
 	
+	public MaintenanceStatus intToMaintenanceStatus(Integer x) {
+		switch (x) {
+		case 1: return MaintenanceStatus.PENDING;
+		case 2: return MaintenanceStatus.PROCESSED;
+		case 3: return MaintenanceStatus.INPROGRESS;
+		case 4: return MaintenanceStatus.COMPLETED;
+		case 5: return MaintenanceStatus.PROBLEM;
+		default: return MaintenanceStatus.PENDING;
+		}
+	}
+	
 	public String addMaintenanceRequest(MaintenanceRequest maintenanceRequest) {
 		
 		mongoClient = new MongoClient();
@@ -77,6 +88,7 @@ public class MaintenanceDAO {
 					 LocalDateTime.parse((CharSequence) document.get("startdatetime")),
 					 LocalDateTime.parse((CharSequence) document.get("enddatetime")),
 					 (Double)document.get("cost"),
+					 intToMaintenanceStatus((Integer)document.get("status")),
 					 "" + document.get("_id")
 			   ));
 		   }
@@ -108,6 +120,7 @@ public class MaintenanceDAO {
 					 LocalDateTime.parse((CharSequence) document.get("startdatetime")),
 					 LocalDateTime.parse((CharSequence) document.get("enddatetime")),
 					 (Double)document.get("cost"),
+					 intToMaintenanceStatus((Integer)document.get("status")),
 					 "" + document.get("_id")
 			   ));
 		   }

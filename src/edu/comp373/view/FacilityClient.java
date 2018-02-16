@@ -21,7 +21,7 @@ import java.util.logging.Level;
 
 public class FacilityClient {
 	
-	static boolean DEBUGGING = true;
+	static boolean DEBUGGING = false;
 
 	public static void main(String[] args) {
 		Logger.getLogger("org.mongodb.driver").setLevel(Level.SEVERE);
@@ -48,7 +48,7 @@ public class FacilityClient {
 			System.out.println("Capacity: " + item.getCapacity() + " Location: " + item.getLocation().getBuildingName() + " " + item.getLocation().getRoom() + " Address: " + item.getLocation().getAddress().getFullAddress());
 		}
         // requestAvailableCapacity
-        ArrayList<Facility> respond = facilityManager.requestAvailableCapacity(100);
+        ArrayList<Facility> respond = facilityManager.requestAvailableCapacity(150);
         Iterator<Facility> iters = respond.iterator();
         System.out.println("Facility_RequestAvailableCapacity: " + respond.size());
         while(iters.hasNext()) {
@@ -115,17 +115,16 @@ public class FacilityClient {
         MaintenanceRequest maintenanceRequest2 = new MaintenanceRequest();
         maintenanceRequest2.setFacility(facility2);
         maintenanceRequest2.setProblem("It is really broken lol");
-        maintenanceRequest2.setStatus(MaintenanceStatus.PENDING);
+        maintenanceRequest2.setStatus(MaintenanceStatus.PROBLEM);
         maintenanceRequest2.setStartDateTime(start);
-        maintenanceRequest2.setEndDateTime(end);
+        maintenanceRequest2.setEndDateTime(end.minusHours(1));
         maintenanceRequest2.setCost(231.1);
         System.out.println("MaintenanceRequest2_ID: " + maintenanceRequest2.saveMaintenanceRequest());
         
         System.out.println("calcMaintenanceCostForFacility: $" + maintenanceManager.calcMaintenanceCostForFacility(facility2));
-        
-        
-        //if(!facility1.removeFacility()) { }
-       
+        System.out.println("calcProblemRateForFacility: " + maintenanceManager.calcProblemRateForFacility(facility2) + "%");
+        System.out.println("calcDownTimeForFacility: " + maintenanceManager.calcDownTimeForFacility(facility2) + " hrs");
+               
         if (!DEBUGGING) {
         		MongoClient mongoClient = new MongoClient();
         		MongoDatabase database = mongoClient.getDatabase(Configs.DB_NAME);
