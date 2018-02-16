@@ -1,6 +1,8 @@
 package edu.comp373.model.manager;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 import edu.comp373.model.facility.Facility;
 import edu.comp373.model.facility.Facility.DetailType;
@@ -18,5 +20,9 @@ public interface FacilityManagerInterface {
 	public void addFacilityDetail(Facility facility, DetailType type,Object obj);
 	
 	public boolean removeFacility(Facility facility);
+	
+	public TreeMap<String, Long> listActualUsage();
+	
+	public Double calcUsageRate(Facility facility, LocalDateTime datetime);
 	
 }

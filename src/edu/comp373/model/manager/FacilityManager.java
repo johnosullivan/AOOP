@@ -1,13 +1,18 @@
 package edu.comp373.model.manager;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.TreeMap;
 
 import edu.comp373.dal.facility.FacilityDAO;
 import edu.comp373.dal.reservations.ReservationDAO;
 import edu.comp373.model.facility.Facility;
 import edu.comp373.model.facility.Facility.DetailType;
 import edu.comp373.model.reservations.Reservation;
+ 
 
 public class FacilityManager implements FacilityManagerInterface {
 
@@ -58,6 +63,42 @@ public class FacilityManager implements FacilityManagerInterface {
 	
 	public ArrayList<Reservation> getAllReservation(Facility facility) {
 		return reservationDAO.getAllReservations(facility.getID());
+	}
+	
+	public TreeMap<String,Long> listActualUsage() {
+		
+		TreeMap<String,Long> listActualUsage = new TreeMap<String,Long>();
+		
+		Iterator<Facility> list = this.listFacilities().iterator();
+		
+		while(list.hasNext()) {
+			Facility facility = list.next();
+			
+			Iterator<Reservation> reservations = facility.getAllReservation().iterator();
+			long seconds = 0;
+			while(reservations.hasNext()) {
+				Reservation item = reservations.next();
+				Duration dur = Duration.between(item.getStart(), item.getEnd());
+				seconds = seconds + dur.getSeconds();
+			}
+			listActualUsage.put(facility.getLocation().getBuildingName() + " - " + facility.getLocation().getRoom(), seconds);
+		}
+	
+		return listActualUsage;
+	}
+	
+	public Double calcUsageRate(Facility facility, LocalDateTime datetime) {
+		
+		Iterator<Reservation> reservations = facility.getAllReservation().iterator();
+		long seconds = 0;
+		long total = Duration.between(facility.getCreated(), datetime).getSeconds();
+		while(reservations.hasNext()) {
+			Reservation item = reservations.next();
+			Duration dur = Duration.between(item.getStart(), item.getEnd());
+			seconds = seconds + dur.getSeconds();
+		}
+				
+		return ((double)seconds/(double)total) * 100;
 	}
 	
 }

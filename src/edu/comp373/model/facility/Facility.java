@@ -17,12 +17,13 @@ public class Facility implements FacilityInterface {
 	private Location location;
 	private Integer capacity;
 	private String id;
+	private LocalDateTime created;
 	
 	private FacilityDAO facilityDAO = new FacilityDAO();
 	private ReservationDAO reservationDAO = new ReservationDAO();
 	private InspectionDAO inspectionDAO = new InspectionDAO();
 	
-	public enum FeatureType {
+	public enum FeatureType { 
 		HAS_STAGE,
 		HAS_PROJECTOR,
 		HAS_HDMI_SUPPORT,
@@ -68,14 +69,16 @@ public class Facility implements FacilityInterface {
 		
 		this.reservations = reservationDAO.getAllReservations(this.id);
 		this.inspections = inspectionDAO.getAllInspections(this.id);
+		this.created = LocalDateTime.parse((CharSequence) facilityDAO.get("created"));
 	}
 	/*
 	 * Constructor to build facility before saving
 	 */
-	public Facility(final Location location, final Integer capacity) {
+	public Facility(final Location location, final Integer capacity, final LocalDateTime created) {
 		this.location = location;
 		this.capacity = capacity;
 		this.id = UUID.randomUUID().toString();
+		this.created = created;
 	}
 	/*
 	 * (non-Javadoc) Saves details of the object basic on the enum type
@@ -208,6 +211,14 @@ public class Facility implements FacilityInterface {
 	 */
 	public void update() {
 		
+	}
+	
+	public void setCreated(LocalDateTime created) {
+		this.created = created;
+	}
+	
+	public LocalDateTime getCreated() {
+		return this.created;
 	}
 	
 	public ArrayList<Reservation> getAllReservation() {

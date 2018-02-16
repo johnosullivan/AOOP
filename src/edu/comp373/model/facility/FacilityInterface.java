@@ -44,4 +44,8 @@ public interface FacilityInterface {
 	
 	public void setID(final String id);
 	
+	public void setCreated(LocalDateTime created);
+	
+	public LocalDateTime getCreated();
+	
 }

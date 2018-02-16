@@ -36,7 +36,7 @@ public class Reservation implements ReservationInterface {
 	public LocalDateTime getEnd() {
 		return this.end;
 	}
-	/*
+	/* 
 	 * (non-Javadoc) Gets the facility ID
 	 * @see edu.comp373.model.reservations.ReservationInterface#getFacilityID()
 	 */
