@@ -5,6 +5,7 @@ import edu.comp373.dal.inspections.InspectionDAO;
 import edu.comp373.dal.reservations.ReservationDAO;
 import edu.comp373.model.inspections.Inspection;
 import edu.comp373.model.reservations.Reservation;
+import edu.comp373.model.users.FacilityUser;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -137,8 +138,9 @@ public class Facility implements FacilityInterface {
 	 * (non-Javadoc) Assigns the facility to use during a start and end datetime
 	 * @see edu.comp373.model.facility.FacilityInterface#assignFacilityToUse(java.time.LocalDateTime, java.time.LocalDateTime)
 	 */
-	public boolean assignFacilityToUse(final LocalDateTime start,final LocalDateTime end) {
-		Reservation res = new Reservation(start,end,this.id);
+	public boolean assignFacilityToUse(final FacilityUser facilityUser, final LocalDateTime start,final LocalDateTime end) {
+		Reservation res = new Reservation(facilityUser,start,end,this.id);
+		System.out.println("getFacilityUser: " + res.getFacilityUser().getID());
 		String id = reservationDAO.addReservation(res);
 		res.setID(id);
 		reservations.add(res);

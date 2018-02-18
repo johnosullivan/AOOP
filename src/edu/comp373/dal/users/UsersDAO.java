@@ -1,4 +1,4 @@
-package edu.comp373.dal.inspections;
+package edu.comp373.dal.users;
 
 import static com.mongodb.client.model.Filters.eq;
 
@@ -11,15 +11,16 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
 import edu.comp373.dal.Configs;
-import edu.comp373.model.inspections.*;
+import edu.comp373.model.users.FacilityUser;
+import edu.comp373.model.users.Inspector;
 
-public class InspectorDAO {
+public class UsersDAO {
 
 	MongoClient mongoClient;
 	MongoCollection<BasicDBObject> collection;
 	MongoDatabase database;
 	
-	public InspectorDAO() {
+	public UsersDAO() {
 		
 	}
 	
@@ -55,6 +56,38 @@ public class InspectorDAO {
 		mongoClient.close();	
 		    
 		return inspector;
+	}
+	
+	public String addUser(FacilityUser user) {
+		
+		mongoClient = new MongoClient();
+		database = mongoClient.getDatabase(Configs.DB_NAME);
+		collection = database.getCollection(Configs.FacilityUser_Collection_Name, BasicDBObject.class);
+
+		BasicDBObject userObj = new BasicDBObject();
+		userObj.append("firstName", user.getFirstName());
+		userObj.append("middleName", user.getMiddleName());
+		userObj.append("lastName", user.getLastName());
+		userObj.append("title", user.getTitle());
+
+		collection.insertOne(userObj);
+		mongoClient.close();	
+		
+		return "" + userObj.get("_id");
+		
+	}
+	
+	public BasicDBObject getUserByID(String id) {
+
+		mongoClient = new MongoClient();
+		database = mongoClient.getDatabase(Configs.DB_NAME);
+		collection = database.getCollection(Configs.FacilityUser_Collection_Name, BasicDBObject.class);
+		
+		FindIterable<BasicDBObject> iterable = collection.find(eq("_id", new ObjectId(id)));
+		BasicDBObject user = iterable.first();
+		mongoClient.close();	
+		    
+		return user;
 	}
 	
 	

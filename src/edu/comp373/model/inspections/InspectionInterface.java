@@ -2,6 +2,8 @@ package edu.comp373.model.inspections;
 
 import java.time.LocalDateTime;
 
+import edu.comp373.model.users.Inspector;
+
 public interface InspectionInterface {
 
 	public Inspector getInspector();

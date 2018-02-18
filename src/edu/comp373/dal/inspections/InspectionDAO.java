@@ -16,7 +16,7 @@ import com.mongodb.client.MongoDatabase;
 
 import edu.comp373.dal.Configs;
 import edu.comp373.model.inspections.Inspection;
-import edu.comp373.model.inspections.Inspector;
+import edu.comp373.model.users.Inspector;
 
 public class InspectionDAO {
 	

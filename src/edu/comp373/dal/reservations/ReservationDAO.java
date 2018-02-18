@@ -17,6 +17,7 @@ import com.mongodb.client.MongoDatabase;
 import edu.comp373.dal.Configs;
 import edu.comp373.model.facility.Facility;
 import edu.comp373.model.reservations.Reservation;
+import edu.comp373.model.users.FacilityUser;
 
 public class ReservationDAO {
 
@@ -33,11 +34,12 @@ public class ReservationDAO {
 		mongoClient = new MongoClient();
 		database = mongoClient.getDatabase(Configs.DB_NAME);
 		collection = database.getCollection(Configs.Reservation_Collection_Name, BasicDBObject.class);
-
+				
 		BasicDBObject reservationObj = new BasicDBObject();
 		reservationObj.append("facility", reservation.getFacilityID());
 		reservationObj.append("start", reservation.getStart().toString());
 		reservationObj.append("end", reservation.getEnd().toString());
+		reservationObj.append("user", reservation.getFacilityUser().getID());
 
 		collection.insertOne(reservationObj);
 		mongoClient.close();	
@@ -56,8 +58,9 @@ public class ReservationDAO {
 		FindIterable<BasicDBObject> iterable = collection.find(eq("facility", id));		
 		Block<BasicDBObject> build_array = new Block<BasicDBObject>() {
 		   @Override
-		   public void apply(final BasicDBObject document) {		      
+		   public void apply(final BasicDBObject document) {	
 		      temp_reservation.add(new Reservation(
+		    		  new FacilityUser("" + document.get("user")),
 		    		  LocalDateTime.parse((CharSequence) document.get("start")),
 		    		  LocalDateTime.parse((CharSequence) document.get("end")),
 		    		  (String)document.get("facility"),

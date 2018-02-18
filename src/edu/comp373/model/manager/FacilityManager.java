@@ -4,7 +4,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Map;
+//import java.util.Map;
 import java.util.TreeMap;
 
 import edu.comp373.dal.facility.FacilityDAO;
@@ -12,6 +12,7 @@ import edu.comp373.dal.reservations.ReservationDAO;
 import edu.comp373.model.facility.Facility;
 import edu.comp373.model.facility.Facility.DetailType;
 import edu.comp373.model.reservations.Reservation;
+import edu.comp373.model.users.FacilityUser;
  
 
 public class FacilityManager implements FacilityManagerInterface {
@@ -52,6 +53,13 @@ public class FacilityManager implements FacilityManagerInterface {
 		facility.setID(id);
 		return facility;
 	}
+	
+	public FacilityUser addFacilityUser(FacilityUser facilityUser) {
+		String id = facilityUser.save();
+		facilityUser.setID(id);
+		return facilityUser;
+	}
+	
 	
 	public void addFacilityDetail(Facility facility, DetailType type,Object obj) {
 		facility.addDetail(type, obj);

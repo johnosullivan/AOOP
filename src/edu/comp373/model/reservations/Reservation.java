@@ -1,6 +1,7 @@
 package edu.comp373.model.reservations;
 
 import java.time.LocalDateTime;
+import edu.comp373.model.users.FacilityUser;
 
 public class Reservation implements ReservationInterface {
 	/* Private vars */
@@ -8,19 +9,31 @@ public class Reservation implements ReservationInterface {
 	private LocalDateTime end;
 	private String faciliyID;
 	private String id; 
+	private FacilityUser facilityuser;
+	
 	/* Constructor for the building before saving to MongoDB */
-	public Reservation(final LocalDateTime start, final LocalDateTime end, final String facID) {
+	public Reservation(final FacilityUser facilityUser, final LocalDateTime start, final LocalDateTime end, final String facID) {
 		this.start = start;
 		this.end = end;
 		this.faciliyID = facID;
 		this.id = "";
+		this.facilityuser = facilityUser;
 	}
 	/* Constructor for the building after saving to MongoDB */
-	public Reservation(final LocalDateTime start, final LocalDateTime end, final String facID, final String ID) {
+	public Reservation(final FacilityUser facilityUser, final LocalDateTime start, final LocalDateTime end, final String facID, final String ID) {
 		this.start = start;
 		this.end = end;
 		this.faciliyID = facID;
 		this.id = ID;
+		this.facilityuser = facilityUser;
+	}
+
+	public FacilityUser getFacilityUser() {
+		return this.facilityuser;
+	}
+
+	public void setFacilityUser(FacilityUser facilityuser) {
+		this.facilityuser = facilityuser;
 	}
 	/*
 	 * (non-Javadoc) Gets the start datetime

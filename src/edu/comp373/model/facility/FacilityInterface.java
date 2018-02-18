@@ -7,6 +7,7 @@ import edu.comp373.model.facility.Facility.DetailType;
 import edu.comp373.model.facility.Facility.FeatureType;
 import edu.comp373.model.inspections.Inspection;
 import edu.comp373.model.reservations.Reservation;
+import edu.comp373.model.users.FacilityUser;
 
 public interface FacilityInterface {
 
@@ -26,7 +27,7 @@ public interface FacilityInterface {
 	
 	public String getID();
 	
-	public boolean assignFacilityToUse(final LocalDateTime start,final LocalDateTime end);
+	public boolean assignFacilityToUse(final FacilityUser facilityUser, final LocalDateTime start,final LocalDateTime end);
 	
 	public ArrayList<Reservation> getReservations();
 

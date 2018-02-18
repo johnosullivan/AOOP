@@ -7,4 +7,5 @@ public class Configs {
 	static public String Inspector_Collection_Name = "inspector";
 	static public String Inspection_Collection_Name = "inspection";
 	static public String MaintenanceRequest_Collection_Name = "maintenancerequest";
+	static public String FacilityUser_Collection_Name = "facilityuser";
 }

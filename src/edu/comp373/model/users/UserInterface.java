@@ -1,6 +1,6 @@
-package edu.comp373.model.inspections;
+package edu.comp373.model.users;
 
-public interface InspectorInterface {
+public interface UserInterface {
 
 	public String getFirstName();
 	
@@ -22,6 +22,6 @@ public interface InspectorInterface {
 	
 	public void setID(final String id);
 	
-	public String addInspector();
+	public String save();
 	
 }

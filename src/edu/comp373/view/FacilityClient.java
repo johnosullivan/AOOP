@@ -8,12 +8,13 @@ import com.mongodb.MongoClient;
 import edu.comp373.model.facility.*;
 import edu.comp373.model.facility.Facility.DetailType;
 import edu.comp373.model.inspections.Inspection;
-import edu.comp373.model.inspections.Inspector;
 import edu.comp373.model.maintenance.MaintenanceRequest;
 import edu.comp373.model.maintenance.MaintenanceRequest.MaintenanceStatus;
 import edu.comp373.model.manager.FacilityManager;
 import edu.comp373.model.manager.MaintenanceManager;
 import edu.comp373.model.reservations.Reservation;
+import edu.comp373.model.users.FacilityUser;
+import edu.comp373.model.users.Inspector;
 import edu.comp373.dal.Configs;
 import com.mongodb.client.MongoDatabase;
 import java.util.Iterator;
@@ -59,9 +60,15 @@ public class FacilityClient {
 			System.out.println("Capacity: " + item.getCapacity() + " Location: " + item.getLocation().getBuildingName() + " " + item.getLocation().getRoom() + " Address: " + item.getLocation().getAddress().getFullAddress());
         }
          
+        FacilityUser facilityUser = new FacilityUser("Rachel","Louise","Cundiff","Ms.");
+        System.out.println("FacilityUser: " + facilityUser.save());
+        
+        //facilityUser = facilityManager.addFacilityUser(facilityUser);
+        
         LocalDateTime start = LocalDateTime.now().minusHours(2); 
         LocalDateTime end = LocalDateTime.now(); 
-        if (facility1.assignFacilityToUse(start, end)) { }
+        if (facility1.assignFacilityToUse(facilityUser,start, end)) { }
+        
         
         //if (facility1.assignFacilityToUse(start,end)) { System.out.println("Assigned - In Use"); }
         //LocalDateTime start_test = LocalDateTime.now().minusHours(4); 
@@ -95,7 +102,7 @@ public class FacilityClient {
         System.out.println("Facility Information: " + facility1.getFacilityInformation());
         
         Inspector inspector = new Inspector("John","Nikolas","O'Sullivan","Mr.");
-        String in_id = inspector.addInspector();
+        String in_id = inspector.save();
         Inspector inspector2 = new Inspector(in_id);
         System.out.println("FirstName: " + inspector2.getFirstName());
         System.out.println("MiddleName: " + inspector2.getMiddleName());

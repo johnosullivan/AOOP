@@ -3,6 +3,7 @@ package edu.comp373.model.inspections;
 import java.time.LocalDateTime;
 
 import edu.comp373.dal.inspections.InspectionDAO;
+import edu.comp373.model.users.Inspector;
 
 public class Inspection implements InspectionInterface {
 	/*
