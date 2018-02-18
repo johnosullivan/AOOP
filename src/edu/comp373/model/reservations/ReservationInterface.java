@@ -2,6 +2,8 @@ package edu.comp373.model.reservations;
 
 import java.time.LocalDateTime;
 
+import edu.comp373.model.users.FacilityUser;
+
 public interface ReservationInterface {
 
 	public LocalDateTime getStart();
@@ -13,5 +15,9 @@ public interface ReservationInterface {
 	public String getID();
 	
 	public void setID(String id);
+	
+	public FacilityUser getFacilityUser();
+
+	public void setFacilityUser(FacilityUser facilityuser);
 	
 }

@@ -49,10 +49,6 @@ public class FacilityDAO {
 		return all; 
 	}
 	
-	public boolean requestAvailableCapacity(Integer size) {
-		return true;
-	}
-	
 	public String addNewFacility(Facility facility) {
 		
 		mongoClient = new MongoClient();
@@ -117,10 +113,6 @@ public class FacilityDAO {
 		mongoClient.close();	
 		
 		return true;
-	}
-	
-	public void addFacilityDetail() {
-		
 	}
 	
 }
