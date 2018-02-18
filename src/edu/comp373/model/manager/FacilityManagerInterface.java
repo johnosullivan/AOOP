@@ -13,7 +13,7 @@ public interface FacilityManagerInterface {
 	
 	public ArrayList<Facility> requestAvailableCapacity(Integer capslimit);
 	
-	public ArrayList<Facility> vacateFacility();
+	public ArrayList<Facility> vacateFacility(final LocalDateTime start, final LocalDateTime end);
 	
 	public Facility addNewFacility(Facility facility);
 	

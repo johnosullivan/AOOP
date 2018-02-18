@@ -29,7 +29,7 @@ Once those three Jars have been included, the project is ready to run the client
 
 - public ArrayList<Facility> listFacilities()
 - public ArrayList<Facility> requestAvailableCapacity(Integer capslimit)
-- public ArrayList<Facility> vacateFacility()
+- public ArrayList<Facility> vacateFacility(final LocalDateTime start, final LocalDateTime end)
 - public Facility addNewFacility(Facility facility)
 - public void addFacilityDetail(Facility facility, DetailType type,Object obj)
 - public boolean removeFacility(Facility facility)

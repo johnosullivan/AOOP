@@ -9,6 +9,7 @@ import edu.comp373.model.users.FacilityUser;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.UUID;
 
 import com.mongodb.BasicDBObject;
@@ -175,14 +176,21 @@ public class Facility implements FacilityInterface {
 	 * @see edu.comp373.model.facility.FacilityInterface#isInUseDuringInterval(java.time.LocalDateTime, java.time.LocalDateTime)
 	 */
 	public boolean isInUseDuringInterval(final LocalDateTime start, final LocalDateTime end) {
-		boolean available = true; 
-		for (int x = 0; x > this.reservations.size(); x++) {
-			Reservation current_reservation = this.reservations.get(x);
-			if(end.isBefore(current_reservation.getStart())) { available = false; }
-			if(start.isBefore(current_reservation.getStart())) { available = false; }
+		
+		Iterator<Reservation> iters = this.reservations.iterator();
+		LocalTimeRange range = new LocalTimeRange(start,end);
+		boolean use = false;
+		
+		while(iters.hasNext()) {
+			Reservation reservation = iters.next();
+			if (new LocalTimeRange(reservation.getStart(),reservation.getEnd()).overlaps(range)) {
+				use = true;
+			}
 		}
-		return available;
+		
+		return use;
 	}
+	
 	/*
 	 * (non-Javadoc) Saves the facility to MongoDB via DAO
 	 * @see edu.comp373.model.facility.FacilityInterface#save()

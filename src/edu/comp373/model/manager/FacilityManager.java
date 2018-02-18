@@ -42,9 +42,15 @@ public class FacilityManager implements FacilityManagerInterface {
 		return respond;
 	} 
 	
-	public ArrayList<Facility> vacateFacility() {
+	public ArrayList<Facility> vacateFacility(final LocalDateTime start, final LocalDateTime end) {
 		ArrayList<Facility> respond = new ArrayList<Facility>();
-		
+		Iterator<Facility> iters = facilityDAO.listFacilities().iterator();
+		while(iters.hasNext()) {
+			Facility facilityObj = iters.next();
+			if (facilityObj.isInUseDuringInterval(start, end)) {
+				respond.add(facilityObj);
+			}
+		}
 		return respond;
 	}
 	
