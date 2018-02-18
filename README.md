@@ -16,3 +16,34 @@ After importing the project into Eclipse, navigate to the "Project Properties" a
 
 Once those three Jars have been included, the project is ready to run the client and JUnit tests. The UML diagram is located <a href="https://github.com/johnosullivan/AOOP/blob/master/AOOP.png">Here.</a>
 
+## Project Features
+
+#### Facility Object
+
+- public String getFacilityInformation()
+- public boolean assignFacilityToUse(final FacilityUser facilityUser, final LocalDateTime start,final LocalDateTime end)
+- public boolean isInUseDuringInterval(final LocalDateTime start, final LocalDateTime end)
+
+
+#### FacilityManager
+
+- public ArrayList<Facility> listFacilities()
+- public ArrayList<Facility> requestAvailableCapacity(Integer capslimit)
+- public ArrayList<Facility> vacateFacility()
+- public Facility addNewFacility(Facility facility)
+- public void addFacilityDetail(Facility facility, DetailType type,Object obj)
+- public boolean removeFacility(Facility facility)
+- public TreeMap<String, Long> listActualUsage()
+- public Double calcUsageRate(Facility facility, LocalDateTime datetime)
+
+#### MaintenanceManager
+
+- public boolean makeFacilityMaintRequest(MaintenanceRequest maintenance)
+- public boolean scheduleMaintenance(MaintenanceRequest maintenance)
+- public Double calcMaintenanceCostForFacility(Facility facility)
+- public Double calcProblemRateForFacility(Facility facility)
+- public Double calcDownTimeForFacility(Facility facility)
+- public ArrayList<MaintenanceRequest> listMaintRequests()
+- public ArrayList<MaintenanceRequest> listMaintenance()
+- public ArrayList<MaintenanceRequest> listFacilityProblems()
+
