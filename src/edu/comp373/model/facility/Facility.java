@@ -56,12 +56,14 @@ public class Facility implements FacilityInterface {
 	 * Constructor to build object from a MongoDB ID
 	 */
 	public Facility(String _id) { 
+		try{
 		
 		BasicDBObject facilityDAO = this.facilityDAO.getFacilityByID(_id);
 		BasicDBObject address = (BasicDBObject)facilityDAO.get("address");
 		BasicDBObject location = (BasicDBObject)facilityDAO.get("location");
+	
+		this.id = "" + facilityDAO.get("id");
 		
-		this.id = "" + facilityDAO.get("_id");
 		this.capacity = facilityDAO.getInt("capacity");
 		
 		Address addressObj = new Address(address.getString("address"),address.getString("city"),address.getString("state"),address.getString("zip"));
@@ -70,6 +72,9 @@ public class Facility implements FacilityInterface {
 		this.reservations = reservationDAO.getAllReservations(this.id);
 		this.inspections = inspectionDAO.getAllInspections(this.id);
 		this.created = LocalDateTime.parse((CharSequence) facilityDAO.get("created"));
+		}catch(Exception e){
+			e.getMessage();
+		}
 	}
 	/*
 	 * Constructor to build facility before saving
@@ -79,6 +84,9 @@ public class Facility implements FacilityInterface {
 		this.capacity = capacity;
 		this.id = UUID.randomUUID().toString();
 		this.created = created;
+	}
+	public LocalDateTime localTimeCreated(){
+		return this.created;
 	}
 	/*
 	 * (non-Javadoc) Saves details of the object basic on the enum type

@@ -1,6 +1,6 @@
 package edu.comp373.view;
 
-import java.time.Duration;
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -17,14 +17,12 @@ import edu.comp373.model.reservations.Reservation;
 import edu.comp373.dal.Configs;
 import com.mongodb.client.MongoDatabase;
 import java.util.Iterator;
-import java.util.Map.Entry;
-import java.util.TreeMap;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
 public class FacilityClient {
 	
-	static boolean DEBUGGING = false;
+	static boolean DEBUGGING = true;
 
 	public static void main(String[] args) {
 		Logger.getLogger("org.mongodb.driver").setLevel(Level.SEVERE);
@@ -33,11 +31,14 @@ public class FacilityClient {
 		MaintenanceManager maintenanceManager = new MaintenanceManager();
 		
 		System.out.println("Advanced Object Oriented Programming (OOP)");
-                
-        Address address1 = new Address("40 E Oak Street","Chicago","IL","60091");
-        Location location1 = new Location("Damen Student Center","RM 345",address1);
-        Facility facility1 = new Facility(location1,125, LocalDateTime.now().minusHours(12));
+		
+		LocalDateTime start = null, end = null, start_test = null, end_test = null;        
         
+		Address address1 = new Address("40 E Oak Street","Chicago","IL","60091");
+        Location location1 = new Location("Damen Student Center","RM 345",address1);
+        Facility facility1 = new Facility(location1,125, start.now());
+        
+        // Adds new facility
         facility1.addDetail(DetailType.CAPACITY, 120);
         facility1 = facilityManager.addNewFacility(facility1);
         System.out.println("Facility ID: " + facility1.getID());
@@ -51,23 +52,26 @@ public class FacilityClient {
 			System.out.println("Capacity: " + item.getCapacity() + " Location: " + item.getLocation().getBuildingName() + " " + item.getLocation().getRoom() + " Address: " + item.getLocation().getAddress().getFullAddress());
 		}
         // requestAvailableCapacity
-        ArrayList<Facility> respond = facilityManager.requestAvailableCapacity(150);
+        ArrayList<Facility> respond = facilityManager.requestAvailableCapacity(100);
         Iterator<Facility> iters = respond.iterator();
         System.out.println("Facility_RequestAvailableCapacity: " + respond.size());
         while(iters.hasNext()) {
         		Facility item = iters.next();
 			System.out.println("Capacity: " + item.getCapacity() + " Location: " + item.getLocation().getBuildingName() + " " + item.getLocation().getRoom() + " Address: " + item.getLocation().getAddress().getFullAddress());
         }
-         
-        LocalDateTime start = LocalDateTime.now().minusHours(2); 
-        LocalDateTime end = LocalDateTime.now(); 
-        if (facility1.assignFacilityToUse(start, end)) { }
-        
-        //if (facility1.assignFacilityToUse(start,end)) { System.out.println("Assigned - In Use"); }
-        //LocalDateTime start_test = LocalDateTime.now().minusHours(4); 
-        //LocalDateTime end_test = start_test.minusHours(2);
-        //if (facility1.assignFacilityToUse(start_test,end_test)) { System.out.println("Assigned - In Use"); }
-        //if (facility1.isInUseDuringInterval(start_test, end_test)) { System.out.println("Facility Is Free"); }
+      
+        try{ 
+	        start = LocalDateTime.now(); 
+	        end = start.plusHours(2);
+	        if (facility1.assignFacilityToUse(start,end)) { System.out.println("Assigned - In Use"); }
+	        	start_test = LocalDateTime.now().minusHours(4); 
+	            end_test = start_test.minusHours(2);
+	        if (facility1.assignFacilityToUse(start_test,end_test)) { System.out.println("Assigned - In Use"); }
+	        if (facility1.isInUseDuringInterval(start_test, end_test)) { System.out.println("Facility Is Free"); }
+	        
+        }catch(DateTimeException dtE){
+        	dtE.getMessage();
+        }
         
         Facility facility2 = new Facility(facility1.getID());
         System.out.println("Building: " + facility2.getLocation().getBuildingName());
@@ -77,14 +81,6 @@ public class FacilityClient {
         System.out.println("City: " + facility2.getLocation().getAddress().getCity());
         System.out.println("State: " + facility2.getLocation().getAddress().getState());
         System.out.println("Zip: " + facility2.getLocation().getAddress().getZip());
-        
-        System.out.println("calcUsageRate: " + facilityManager.calcUsageRate(facility2, LocalDateTime.now()) + "%");
-        
-        TreeMap<String,Long> tree = facilityManager.listActualUsage();
-        for (Entry<String, Long> entry: tree.entrySet()) {
-        		System.out.println("listActualUsage_Facility: " + entry.getKey() + " ActualUsage: " + Duration.ofSeconds(entry.getValue()).toHours() + " hrs");
-        }
-        
         
         Iterator<Reservation> res = facility2.getReservations().iterator();
         while(res.hasNext()) {
@@ -127,16 +123,17 @@ public class FacilityClient {
         MaintenanceRequest maintenanceRequest2 = new MaintenanceRequest();
         maintenanceRequest2.setFacility(facility2);
         maintenanceRequest2.setProblem("It is really broken lol");
-        maintenanceRequest2.setStatus(MaintenanceStatus.PROBLEM);
+        maintenanceRequest2.setStatus(MaintenanceStatus.PENDING);
         maintenanceRequest2.setStartDateTime(start);
-        maintenanceRequest2.setEndDateTime(end.minusHours(1));
+        maintenanceRequest2.setEndDateTime(end);
         maintenanceRequest2.setCost(231.1);
         System.out.println("MaintenanceRequest2_ID: " + maintenanceRequest2.saveMaintenanceRequest());
         
         System.out.println("calcMaintenanceCostForFacility: $" + maintenanceManager.calcMaintenanceCostForFacility(facility2));
-        System.out.println("calcProblemRateForFacility: " + maintenanceManager.calcProblemRateForFacility(facility2) + "%");
-        System.out.println("calcDownTimeForFacility: " + maintenanceManager.calcDownTimeForFacility(facility2) + " hrs");
-               
+        
+        
+        //if(!facility1.removeFacility()) { }
+       
         if (!DEBUGGING) {
         		MongoClient mongoClient = new MongoClient();
         		MongoDatabase database = mongoClient.getDatabase(Configs.DB_NAME);

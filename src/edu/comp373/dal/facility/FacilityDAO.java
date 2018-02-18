@@ -77,7 +77,6 @@ public class FacilityDAO {
 		facilitObj.append("location", locationObj);
 		facilitObj.append("address", addressObj);
 		facilitObj.append("created", facility.getCreated().toString());
-		
 
 		collection.insertOne(facilitObj);
 		
