@@ -23,6 +23,7 @@ Once those three Jars have been included, the project is ready to run the client
 - public String getFacilityInformation()
 - public boolean assignFacilityToUse(final FacilityUser facilityUser, final LocalDateTime start,final LocalDateTime end)
 - public boolean isInUseDuringInterval(final LocalDateTime start, final LocalDateTime end)
+- public ArrayList<Inspection> listInspections()
 
 
 #### FacilityManager.java
