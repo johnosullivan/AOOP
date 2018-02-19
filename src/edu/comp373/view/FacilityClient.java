@@ -25,7 +25,7 @@ import java.util.logging.Level;
 
 public class FacilityClient {
 	
-	static boolean DEBUGGING = false;
+	static boolean DEBUGGING = true;
 
 	public static void main(String[] args) {
 		Logger.getLogger("org.mongodb.driver").setLevel(Level.SEVERE);
