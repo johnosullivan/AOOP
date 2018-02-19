@@ -14,18 +14,19 @@ After importing the project into Eclipse, navigate to the "Project Properties" a
 - mongodb-driver-3.6.3.jar
 - mongodb-driver-core-3.6.3.jar
 
-Once those three Jars have been included, the project is ready to run the client and JUnit tests. The UML diagram is located <a href="https://github.com/johnosullivan/AOOP/blob/master/AOOP.png">Here.</a>
+Once those three Jars have been included, the project is ready to run the client and JUnit tests. The UML/DB diagram is located <a href="https://github.com/johnosullivan/AOOP/blob/master/AOOP.png">Here.</a>
 
 ## Project Features
 
-#### Facility Object
+#### Facility.java
 
 - public String getFacilityInformation()
 - public boolean assignFacilityToUse(final FacilityUser facilityUser, final LocalDateTime start,final LocalDateTime end)
 - public boolean isInUseDuringInterval(final LocalDateTime start, final LocalDateTime end)
+- public ArrayList<Inspection> listInspections()
 
 
-#### FacilityManager
+#### FacilityManager.java
 
 - public ArrayList<Facility> listFacilities()
 - public ArrayList<Facility> requestAvailableCapacity(Integer capslimit)
@@ -36,7 +37,7 @@ Once those three Jars have been included, the project is ready to run the client
 - public TreeMap<String, Long> listActualUsage()
 - public Double calcUsageRate(Facility facility, LocalDateTime datetime)
 
-#### MaintenanceManager
+#### MaintenanceManager.java
 
 - public boolean makeFacilityMaintRequest(MaintenanceRequest maintenance)
 - public boolean scheduleMaintenance(MaintenanceRequest maintenance)
@@ -46,4 +47,19 @@ Once those three Jars have been included, the project is ready to run the client
 - public ArrayList<MaintenanceRequest> listMaintRequests()
 - public ArrayList<MaintenanceRequest> listMaintenance()
 - public ArrayList<MaintenanceRequest> listFacilityProblems()
+
+#### Additional Supporting Classes
+
+- Address.java / AddressInterface.java
+- FacilityInterface.java
+- LocalTimeRange.java
+- Location.java / LocationInterface.java
+- Inspection.java / InspectionInterfacce.java
+- MaintenanceRequest.java / MaintenanceRequestInterface.java
+- FacilityManagerInterface.java
+- MaintenanceManagerInterface.java
+- Reservation.java / ReservationInterface.java
+- FacilityUser.java / Inspector.java / UserInterface.java
+
+
 
