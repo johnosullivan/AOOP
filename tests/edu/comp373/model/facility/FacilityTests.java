@@ -2,6 +2,8 @@ package edu.comp373.model.facility;
 
 import org.junit.*;
 
+import edu.comp373.model.inspections.Inspection;
+import edu.comp373.model.reservations.Reservation;
 import edu.comp373.model.users.FacilityUser;
 import edu.comp373.model.users.Inspector;
 
@@ -74,6 +76,17 @@ public class FacilityTests {
 		assertEquals("Nikolas",user.getMiddleName());
 		assertEquals("O'Sullivan",user.getLastName());
 		assertEquals("Mr.",user.getTitle());
+		Inspection inspection = new Inspection();
+		inspection.setInspector(user);
+		LocalDateTime datetime = LocalDateTime.now().minusHours(2); 
+		inspection.setDateTime(datetime);
+		inspection.setReport("some report");
+		inspection.setID("theid");
+		inspection.setFacility("facility");
+		assertEquals(datetime,inspection.getDateTime());
+		assertEquals("facility",inspection.getFacility());
+		assertEquals("some report",inspection.getReport());
+		assertEquals("theid",inspection.getID());
 	}
 	
 	
@@ -107,10 +120,14 @@ public class FacilityTests {
 		user.setMiddleName("Nikolas");
 		user.setLastName("O'Sullivan");
 		user.setTitle("Mr.");
-        //LocalDateTime start = LocalDateTime.now().minusHours(2); 
-        //LocalDateTime end = LocalDateTime.now(); 
-        //if (facility.assignFacilityToUse(user,start, end)) { }
+        LocalDateTime start = LocalDateTime.now().minusHours(2); 
+        LocalDateTime end = LocalDateTime.now(); 
+        Reservation reversation = new Reservation(user,start,end,"");
+        assertEquals(start,reversation.getStart());
+        assertEquals(end,reversation.getEnd());
+        assertEquals("",reversation.getFacilityID());
 	}
+
 	
 
 
