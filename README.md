@@ -14,7 +14,11 @@ After importing the project into Eclipse, navigate to the "Project Properties" a
 - mongodb-driver-3.6.3.jar
 - mongodb-driver-core-3.6.3.jar
 
-Once those three Jars have been included, the project is ready to run the client and JUnit tests. The UML/DB diagram is located <a href="https://github.com/johnosullivan/AOOP/blob/master/AOOP.png">Here.</a>
+Once those three Jars have been included, the project is ready to run the client and JUnit tests. The UML/DB diagram is located <a href="https://github.com/johnosullivan/AOOP/blob/master/AOOP.png">Here.</a> To run the test client and junit tests please ensure mongodb is running in the terminal like so,
+```
+mongod --dbpath .
+```
+, code converage is at 72%.
 
 ## Project Features
 
@@ -60,6 +64,3 @@ Once those three Jars have been included, the project is ready to run the client
 - MaintenanceManagerInterface.java
 - Reservation.java / ReservationInterface.java
 - FacilityUser.java / Inspector.java / UserInterface.java
-
-
-
