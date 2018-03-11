@@ -1,6 +1,11 @@
 package edu.comp373.view;
 
 import java.time.Duration;
+
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -28,6 +33,10 @@ public class FacilityClient {
 	static boolean DEBUGGING = false;
 
 	public static void main(String[] args) {
+		
+		ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/app-context.xml");
+		
+		
 		Logger.getLogger("org.mongodb.driver").setLevel(Level.SEVERE);
 		
 		FacilityManager facilityManager = new FacilityManager();
