@@ -10,5 +10,8 @@
 	<context:component-scan base-package="edu.comp373.model" />
 	
 	<bean id="address" class="edu.comp373.model.facility.Address" scope="prototype"/>
+	<bean id="location" class="edu.comp373.model.facility.Location" scope="prototype">
+		<property name="address" ref="address"/>
+	</bean>
 	
 </beans>

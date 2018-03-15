@@ -37,6 +37,7 @@ public class FacilityClient {
 		ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/app-context.xml");
 		
 		
+		/*
 		Logger.getLogger("org.mongodb.driver").setLevel(Level.SEVERE);
 		
 		FacilityManager facilityManager = new FacilityManager();
@@ -159,6 +160,7 @@ public class FacilityClient {
         		database.drop();
         		mongoClient.close();
         }
+        */
         
 	}
 	

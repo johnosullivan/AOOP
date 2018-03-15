@@ -7,11 +7,11 @@
 
 	<description>Wiring the dependencies for the Facility Application.</description>
 
-	<context:component-scan base-package="com.online.bookstore" />
+	<context:component-scan base-package="edu.comp373.model" />
 	
-	<bean id="billingAddress" class="com.online.bookstore.model.customer.AddressImpl" scope="prototype"/>
-	<bean id="shippingAddress" class="com.online.bookstore.model.customer.AddressImpl" scope="prototype"/>
-	<bean id="book" class="com.online.bookstore.model.product.Book" scope="prototype"/>
-    
+	<bean id="address" class="edu.comp373.model.facility.Address" scope="prototype"/>
+	<bean id="location" class="edu.comp373.model.facility.Location" scope="prototype">
+		<property name="address" ref="address"/>
+	</bean>
 	
 </beans>
