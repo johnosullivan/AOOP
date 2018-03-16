@@ -13,14 +13,23 @@
 		<constructor-arg name="from" value=""/>
 		<constructor-arg name="to" value=""/>
 	</bean>
-	
+		
 	<bean id="facilityuser" class="edu.comp373.model.users.FacilityUser" scope="prototype"/>
+	
+	<bean id="inspector" class="edu.comp373.model.users.Inspector" scope="prototype"/>
 	
 	<bean id="address" class="edu.comp373.model.facility.Address" scope="prototype"/>
 		
 	<bean id="inspection" class="edu.comp373.model.inspections.Inspection" scope="prototype"/>
 	
 	<bean id="location" class="edu.comp373.model.facility.Location" scope="prototype">
+		<property name="address" ref="address"/>
+		<constructor-arg name="buildingname" value=""/>
+		<constructor-arg name="roomname" value=""/>
+		<constructor-arg name="address" value=""/>
+	</bean>
+	
+	<bean id="location_basic" class="edu.comp373.model.facility.Location" scope="prototype">
 		<property name="address" ref="address"/>
 	</bean>
 	
@@ -40,5 +49,13 @@
             </list>
         </property>
 	</bean>
+	
+	<bean id="maintenancerequest" class="edu.comp373.model.maintenance.MaintenanceRequest" scope="prototype">
+		<property name="facility" ref="facility"/>
+	</bean>
+	
+	<bean id="facilitymanager" class="edu.comp373.model.manager.FacilityManager" scope="prototype"/>
+	
+	<bean id="maintenancemanager" class="edu.comp373.model.manager.MaintenanceManager" scope="prototype"/>
 	
 </beans>

@@ -74,5 +74,19 @@ public class Reservation implements ReservationInterface {
 	public void setID(String id) {
 		this.id = id;
 	}
+	/*
+	 * (non-Javadoc)
+	 * @see edu.comp373.model.reservations.ReservationInterface#setStart(java.time.LocalDateTime)
+	 */
+	public void setStart(LocalDateTime start) {
+		this.start = start;
+	}
+	/*
+	 * (non-Javadoc)
+	 * @see edu.comp373.model.reservations.ReservationInterface#setEnd(java.time.LocalDateTime)
+	 */
+	public void setEnd(LocalDateTime end) {
+		this.end = end;
+	}
 	
 }

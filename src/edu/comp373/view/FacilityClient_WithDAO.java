@@ -2,10 +2,6 @@ package edu.comp373.view;
 
 import java.time.Duration;
 
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -29,34 +25,13 @@ import java.util.TreeMap;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
-public class FacilityClient {
+public class FacilityClient_WithDAO {
 	
 	static boolean DEBUGGING = false;
 
 	public static void main(String[] args) {
 		Logger.getLogger("org.mongodb.driver").setLevel(Level.SEVERE);
-		
-		ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/app-context.xml");
-		
-		Location location = (Location) context.getBean("location");
-		
-		Address address = (Address) context.getBean("address");
-		
-		Inspection inspection = (Inspection) context.getBean("inspection");
-		
-		FacilityUser facilityuser = (FacilityUser) context.getBean("facilityuser");
-		
-		Reservation reservation = (Reservation) context.getBean("reservation");
-		
-		LocalDateTime start = LocalDateTime.now().minusHours(2); 
-        LocalDateTime end = LocalDateTime.now();
-        
-        LocalTimeRange range = (LocalTimeRange) context.getBean("localdatetimerange",start,end);
-
-		Facility facility = (Facility) context.getBean("facility");
-		
-		/*
-		
+				
 		FacilityManager facilityManager = new FacilityManager();
 		MaintenanceManager maintenanceManager = new MaintenanceManager();
 		
@@ -177,7 +152,7 @@ public class FacilityClient {
         		database.drop();
         		mongoClient.close();
         }
-        */
+        
         
 	}
 	

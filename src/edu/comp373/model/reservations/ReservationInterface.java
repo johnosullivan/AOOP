@@ -20,4 +20,8 @@ public interface ReservationInterface {
 
 	public void setFacilityUser(FacilityUser facilityuser);
 	
+	public void setStart(LocalDateTime start);
+	
+	public void setEnd(LocalDateTime end);
+	
 }
