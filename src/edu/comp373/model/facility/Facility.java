@@ -83,6 +83,20 @@ public class Facility implements FacilityInterface {
 		this.created = created;
 	}
 	/*
+	 * (non-Javadoc)
+	 * @see edu.comp373.model.facility.FacilityInterface#setReservations(java.util.ArrayList)
+	 */
+	public void setReservations(ArrayList<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+	/*
+	 * (non-Javadoc)
+	 * @see edu.comp373.model.facility.FacilityInterface#setInspections(java.util.ArrayList)
+	 */
+	public void setInspections(ArrayList<Inspection> inspections) {
+		this.inspections = inspections;
+	}
+	/*
 	 * (non-Javadoc) Saves details of the object basic on the enum type
 	 * @see edu.comp373.model.facility.FacilityInterface#addDetail(edu.comp373.model.facility.Facility.DetailType, java.lang.Object)
 	 */

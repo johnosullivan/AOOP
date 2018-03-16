@@ -22,6 +22,7 @@ import edu.comp373.model.users.FacilityUser;
 import edu.comp373.model.users.Inspector;
 import edu.comp373.dal.Configs;
 import com.mongodb.client.MongoDatabase;
+
 import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.TreeMap;
@@ -33,12 +34,28 @@ public class FacilityClient {
 	static boolean DEBUGGING = false;
 
 	public static void main(String[] args) {
+		Logger.getLogger("org.mongodb.driver").setLevel(Level.SEVERE);
 		
 		ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/app-context.xml");
 		
+		Location location = (Location) context.getBean("location");
+		
+		Address address = (Address) context.getBean("address");
+		
+		Inspection inspection = (Inspection) context.getBean("inspection");
+		
+		FacilityUser facilityuser = (FacilityUser) context.getBean("facilityuser");
+		
+		Reservation reservation = (Reservation) context.getBean("reservation");
+		
+		LocalDateTime start = LocalDateTime.now().minusHours(2); 
+        LocalDateTime end = LocalDateTime.now();
+        
+        LocalTimeRange range = (LocalTimeRange) context.getBean("localdatetimerange",start,end);
+
+		Facility facility = (Facility) context.getBean("facility");
 		
 		/*
-		Logger.getLogger("org.mongodb.driver").setLevel(Level.SEVERE);
 		
 		FacilityManager facilityManager = new FacilityManager();
 		MaintenanceManager maintenanceManager = new MaintenanceManager();

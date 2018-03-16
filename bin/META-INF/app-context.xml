@@ -7,11 +7,38 @@
 
 	<description>Wiring the dependencies for the Facility Application.</description>
 
-	<context:component-scan base-package="edu.comp373.model" />
+	<context:component-scan base-package="edu.comp373.model"/>
+	
+	<bean id="localdatetimerange" class="edu.comp373.model.facility.LocalTimeRange" scope="prototype">
+		<constructor-arg name="from" value=""/>
+		<constructor-arg name="to" value=""/>
+	</bean>
+	
+	<bean id="facilityuser" class="edu.comp373.model.users.FacilityUser" scope="prototype"/>
 	
 	<bean id="address" class="edu.comp373.model.facility.Address" scope="prototype"/>
+		
+	<bean id="inspection" class="edu.comp373.model.inspections.Inspection" scope="prototype"/>
+	
 	<bean id="location" class="edu.comp373.model.facility.Location" scope="prototype">
 		<property name="address" ref="address"/>
+	</bean>
+	
+	<bean id="reservation" class="edu.comp373.model.reservations.Reservation" scope="prototype">
+		<property name="facilityUser" ref="facilityuser"/>
+	</bean>
+	
+	<bean id="facility" class="edu.comp373.model.facility.Facility" scope="prototype">
+		<property name="reservations">
+        		<list>
+            		<ref bean="reservation" />
+            </list>
+        </property>
+        <property name="inspections">
+        		<list>
+            		<ref bean="inspection" />
+            </list>
+        </property>
 	</bean>
 	
 </beans>

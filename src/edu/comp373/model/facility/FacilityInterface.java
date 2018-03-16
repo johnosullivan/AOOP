@@ -49,4 +49,8 @@ public interface FacilityInterface {
 	
 	public LocalDateTime getCreated();
 	
+	public void setReservations(ArrayList<Reservation> reservations);
+	
+	public void setInspections(ArrayList<Inspection> inspections);
+		
 }

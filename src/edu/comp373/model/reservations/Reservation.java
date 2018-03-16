@@ -27,6 +27,10 @@ public class Reservation implements ReservationInterface {
 		this.id = ID;
 		this.facilityuser = facilityUser;
 	}
+	
+	public Reservation() {
+		
+	}
 
 	public FacilityUser getFacilityUser() {
 		return this.facilityuser;
