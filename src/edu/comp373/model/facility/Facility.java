@@ -74,9 +74,10 @@ public class Facility implements FacilityInterface {
 		Address addressObj = new Address(address.getString("address"),address.getString("city"),address.getString("state"),address.getString("zip"));
 		this.location = new Location(location.getString("buildingname"),location.getString("room"),addressObj);
 		
-		this.reservations = reservationDAO.getAllReservations(this.id);		
-		this.inspections = inspectionDAO.getAllInspections(this.id);
+		this.reservations = reservationDAO.getAllReservations(this.id);
 		
+		this.inspections = inspectionDAO.getAllInspections(this.id);
+
 		this.created = LocalDateTime.parse((CharSequence) facilityDAO.get("created"));
 	}
 	
@@ -165,12 +166,10 @@ public class Facility implements FacilityInterface {
 	 * @see edu.comp373.model.facility.FacilityInterface#assignFacilityToUse(java.time.LocalDateTime, java.time.LocalDateTime)
 	 */
 	public boolean assignFacilityToUse(final FacilityUser facilityUser, final LocalDateTime start,final LocalDateTime end) {
-		System.out.println(this.reservations.size());
 		Reservation res = new Reservation(facilityUser,start,end,this.id);
 		String id = reservationDAO.addReservation(res);
 		res.setID(id);
 		this.reservations.add(res);
-		System.out.println(this.reservations.size());
 		return true;
 	}
 	/*

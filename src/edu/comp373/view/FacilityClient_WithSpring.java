@@ -44,7 +44,7 @@ public class FacilityClient_WithSpring {
         LocalDateTime start = LocalDateTime.now().minusHours(2); 
         LocalDateTime end = LocalDateTime.now(); 
         // Creating the maintenance request object from spring bean
-		MaintenanceRequest maintenanceRequest = new MaintenanceRequest();
+		MaintenanceRequest maintenanceRequest = (MaintenanceRequest)context.getBean("maintenancerequest");
         maintenanceRequest.setFacility(facility);
         maintenanceRequest.setProblem("Fix the broken pipe in the den");
         maintenanceRequest.setStatus(MaintenanceStatus.PENDING);
