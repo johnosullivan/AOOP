@@ -52,5 +52,7 @@ public interface FacilityInterface {
 	public void setReservations(ArrayList<Reservation> reservations);
 	
 	public void setInspections(ArrayList<Inspection> inspections);
+	
+	public void setReservation(Reservation reservation);
 		
 }

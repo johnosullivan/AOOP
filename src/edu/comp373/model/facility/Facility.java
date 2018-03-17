@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.mongodb.BasicDBObject;
 
 public class Facility implements FacilityInterface {
@@ -24,6 +26,8 @@ public class Facility implements FacilityInterface {
 	private FacilityDAO facilityDAO = new FacilityDAO();
 	private ReservationDAO reservationDAO = new ReservationDAO();
 	private InspectionDAO inspectionDAO = new InspectionDAO();
+	
+	public Reservation reservation;
 	
 	public enum FeatureType { 
 		HAS_STAGE,
@@ -47,6 +51,7 @@ public class Facility implements FacilityInterface {
 	}
 	
 	private ArrayList<FeatureType> features = new ArrayList<FeatureType>();
+	@Autowired(required = false)
 	private ArrayList<Reservation> reservations = new ArrayList<Reservation>();
 	private ArrayList<Inspection> inspections = new ArrayList<Inspection>();
 	
@@ -69,10 +74,16 @@ public class Facility implements FacilityInterface {
 		Address addressObj = new Address(address.getString("address"),address.getString("city"),address.getString("state"),address.getString("zip"));
 		this.location = new Location(location.getString("buildingname"),location.getString("room"),addressObj);
 		
-		this.reservations = reservationDAO.getAllReservations(this.id);
+		this.reservations = reservationDAO.getAllReservations(this.id);		
 		this.inspections = inspectionDAO.getAllInspections(this.id);
+		
 		this.created = LocalDateTime.parse((CharSequence) facilityDAO.get("created"));
 	}
+	
+	public void setReservation(Reservation reservation) {
+		this.reservation = reservation;
+	}
+	
 	/*
 	 * Constructor to build facility before saving
 	 */
@@ -154,11 +165,12 @@ public class Facility implements FacilityInterface {
 	 * @see edu.comp373.model.facility.FacilityInterface#assignFacilityToUse(java.time.LocalDateTime, java.time.LocalDateTime)
 	 */
 	public boolean assignFacilityToUse(final FacilityUser facilityUser, final LocalDateTime start,final LocalDateTime end) {
+		System.out.println(this.reservations.size());
 		Reservation res = new Reservation(facilityUser,start,end,this.id);
-		System.out.println("getFacilityUser: " + res.getFacilityUser().getID());
 		String id = reservationDAO.addReservation(res);
 		res.setID(id);
-		reservations.add(res);
+		this.reservations.add(res);
+		System.out.println(this.reservations.size());
 		return true;
 	}
 	/*

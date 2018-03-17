@@ -24,4 +24,6 @@ public interface ReservationInterface {
 	
 	public void setEnd(LocalDateTime end);
 	
+	public void setFacility(String id);
+	
 }

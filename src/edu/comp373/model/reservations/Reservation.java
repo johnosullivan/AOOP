@@ -31,6 +31,10 @@ public class Reservation implements ReservationInterface {
 	public Reservation() {
 		
 	}
+	
+	public void setFacility(String id) {
+		this.faciliyID = id;
+	}
 
 	public FacilityUser getFacilityUser() {
 		return this.facilityuser;

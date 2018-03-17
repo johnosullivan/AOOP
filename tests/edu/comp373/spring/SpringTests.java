@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.time.LocalDateTime;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -26,6 +27,11 @@ public class SpringTests {
 	@Before
 	public void setup() {
 		context = new ClassPathXmlApplicationContext("META-INF/app-context.xml");
+	}
+	
+	@After
+	public void teardown() {
+		((ClassPathXmlApplicationContext) context).close();
 	}
 	
 	@Test

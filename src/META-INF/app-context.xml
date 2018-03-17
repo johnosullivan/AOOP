@@ -7,7 +7,9 @@
 
 	<description>Wiring the dependencies for the Facility Application.</description>
 
-	<context:component-scan base-package="edu.comp373.model"/>
+	<context:component-scan base-package="edu.comp373"/>
+	
+	<bean id="reservationDAO" class="edu.comp373.dal.reservations.ReservationDAO" scope="prototype"/>
 	
 	<bean id="localdatetimerange" class="edu.comp373.model.facility.LocalTimeRange" scope="prototype">
 		<constructor-arg name="from" value=""/>
@@ -16,7 +18,15 @@
 		
 	<bean id="facilityuser" class="edu.comp373.model.users.FacilityUser" scope="prototype"/>
 	
+	<bean id="facilityuser_id" class="edu.comp373.model.users.FacilityUser" scope="prototype">
+		<constructor-arg name="_id" value=""/>
+	</bean>
+	
 	<bean id="inspector" class="edu.comp373.model.users.Inspector" scope="prototype"/>
+	
+	<bean id="inspector_id" class="edu.comp373.model.users.Inspector" scope="prototype">
+		<constructor-arg name="_id" value=""/>
+	</bean>
 	
 	<bean id="address" class="edu.comp373.model.facility.Address" scope="prototype"/>
 		
@@ -39,14 +49,20 @@
 	
 	<bean id="facility" class="edu.comp373.model.facility.Facility" scope="prototype">
 		<property name="reservations">
-        		<list>
-            		<ref bean="reservation" />
-            </list>
+        		<list/>
         </property>
         <property name="inspections">
-        		<list>
-            		<ref bean="inspection" />
-            </list>
+        		<list/>
+        </property>
+	</bean>
+	
+	<bean id="facility_id" class="edu.comp373.model.facility.Facility" scope="prototype">
+		<constructor-arg name="_id" value=""/>
+		<property name="reservations">
+        		<list/>
+        </property>
+        <property name="inspections">
+        		<list/>
         </property>
 	</bean>
 	
@@ -54,7 +70,9 @@
 		<property name="facility" ref="facility"/>
 	</bean>
 	
-	<bean id="facilitymanager" class="edu.comp373.model.manager.FacilityManager" scope="prototype"/>
+	<bean id="facilitymanager" class="edu.comp373.model.manager.FacilityManager" scope="prototype">
+		<!--<property name="facilityDAO" ref="facilityDAO"/>-->
+	</bean>
 	
 	<bean id="maintenancemanager" class="edu.comp373.model.manager.MaintenanceManager" scope="prototype"/>
 	

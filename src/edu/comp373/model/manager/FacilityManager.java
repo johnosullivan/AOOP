@@ -42,6 +42,10 @@ public class FacilityManager implements FacilityManagerInterface {
 		return respond;
 	} 
 	
+	public void setFacilityDAO(FacilityDAO facilityDAO) {
+		this.facilityDAO = facilityDAO;
+	}
+	
 	public ArrayList<Facility> vacateFacility(final LocalDateTime start, final LocalDateTime end) {
 		ArrayList<Facility> respond = new ArrayList<Facility>();
 		Iterator<Facility> iters = facilityDAO.listFacilities().iterator();

@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
+import edu.comp373.dal.facility.FacilityDAO;
 import edu.comp373.model.facility.Facility;
 import edu.comp373.model.facility.Facility.DetailType;
 
@@ -24,5 +25,7 @@ public interface FacilityManagerInterface {
 	public TreeMap<String, Long> listActualUsage();
 	
 	public Double calcUsageRate(Facility facility, LocalDateTime datetime);
+	
+	public void setFacilityDAO(FacilityDAO facilityDAO);
 	
 }

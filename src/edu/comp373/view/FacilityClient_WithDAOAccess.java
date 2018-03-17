@@ -25,7 +25,7 @@ import java.util.TreeMap;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
-public class FacilityClient_WithDAO {
+public class FacilityClient_WithDAOAccess {
 	
 	static boolean DEBUGGING = false;
 
