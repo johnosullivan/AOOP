@@ -44,6 +44,7 @@ public class Inspector implements UserInterface {
 	 * (non-Javadoc) Gets the FirstName
 	 * @see edu.comp373.model.users.UserInterface#getFirstName()
 	 */
+	@Override
 	public String getFirstName() {
 		return this.firstName;
 	}
@@ -51,6 +52,7 @@ public class Inspector implements UserInterface {
 	 * (non-Javadoc) Sets the FirstName
 	 * @see edu.comp373.model.users.UserInterface#setFirstName(java.lang.String)
 	 */
+	@Override
 	public void setFirstName(final String firstName) {
 		this.firstName = firstName;
 	}
