@@ -3,8 +3,12 @@ package edu.comp373.model.users;
 import com.mongodb.BasicDBObject;
 
 import edu.comp373.dal.users.UsersDAO;
+import edu.comp373.model.maintenance.MaintenanceRequest;
+import edu.comp373.model.observer.Observer;
+import edu.comp373.model.observer.Request;
+import edu.comp373.model.reservations.Reservation;
 
-public class FacilityUser implements UserInterface {
+public class FacilityUser extends Observer {
 	/* Private vars */
 	private String firstName;
 	private String middleName;
@@ -40,6 +44,7 @@ public class FacilityUser implements UserInterface {
 		this.lastName = (String)userObj.get("lastName");
 		this.title = (String)userObj.get("title");
 	}
+	
 	/*
 	 * (non-Javadoc) Gets the FirstName
 	 * @see edu.comp373.model.users.UserInterface#getFirstName()
@@ -119,6 +124,22 @@ public class FacilityUser implements UserInterface {
 	public String save() {
 		this.id = this.usersDAO.addUser(this);
 		return this.id;
+	}
+	
+	@Override
+	public void update() {
+		if (this.subject instanceof MaintenanceRequest) {
+			System.out.println("MaintenanceRequest -> Update the request FacilityUser");
+		}
+		
+		if (this.subject instanceof Reservation) {
+			System.out.println("Reservation -> Update the request FacilityUser");
+		}
+	}
+	
+	public void attachToRequest(Request subject) {
+		this.subject = subject;
+	    this.subject.attach(this);
 	}
 	
 }

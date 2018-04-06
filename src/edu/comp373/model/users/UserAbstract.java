@@ -1,5 +1,6 @@
 package edu.comp373.model.users;
 
+import edu.comp373.model.observer.Request;
 
 public abstract class UserAbstract {
 
@@ -51,6 +52,10 @@ public abstract class UserAbstract {
 	
 	public String save() {
 		return user.save();
+	}
+	
+	public void attachToRequest(Request subject) {
+		user.attachToRequest(subject);
 	}
  
 	

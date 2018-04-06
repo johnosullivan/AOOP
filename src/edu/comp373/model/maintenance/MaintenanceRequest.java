@@ -1,9 +1,12 @@
 package edu.comp373.model.maintenance;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import edu.comp373.dal.maintenance.MaintenanceDAO;
 import edu.comp373.model.facility.Facility;
+import edu.comp373.model.observer.Observer;
 
 public class MaintenanceRequest implements MaintenanceRequestInterface {
 
@@ -16,6 +19,14 @@ public class MaintenanceRequest implements MaintenanceRequestInterface {
 	private Double cost;
 	
 	private MaintenanceDAO maintenanceDAO = new MaintenanceDAO();
+	
+	private List<Observer> observers = new ArrayList<Observer>();
+	
+	public void notifyAllObservers(){
+	   for (Observer observer : observers) {
+	      observer.update();
+	   }
+	} 
 	
 	public enum MaintenanceStatus {
 		PENDING,
@@ -55,7 +66,7 @@ public class MaintenanceRequest implements MaintenanceRequestInterface {
 		case PROCESSED: return 2;
 		case INPROGRESS: return 3;
 		case COMPLETED: return 4;
-		case PROBLEM: return 5;
+		case PROBLEM: return 5; 
 		default: return 1;
 		}
 	}
@@ -108,6 +119,7 @@ public class MaintenanceRequest implements MaintenanceRequestInterface {
 	
 	public void setStatus(final MaintenanceStatus status) {
 		this.status = status;
+		this.notifyAllObservers();
 	}
 	
 	public String saveMaintenanceRequest() {
@@ -129,6 +141,11 @@ public class MaintenanceRequest implements MaintenanceRequestInterface {
 
 	public LocalDateTime getStartDateTime() {
 		return this.start_datetime;
+	}
+
+	@Override
+	public void attach(Observer user) {
+		observers.add(user);		
 	}
 
 }

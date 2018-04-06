@@ -1,5 +1,7 @@
 package edu.comp373.model.users;
 
+import edu.comp373.model.observer.Request;
+
 public interface UserInterface {
 
 	public String getFirstName();
@@ -23,5 +25,7 @@ public interface UserInterface {
 	public void setID(final String id);
 	
 	public String save();
+	
+	public void attachToRequest(Request subject);
 	
 }

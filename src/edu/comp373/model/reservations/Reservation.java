@@ -1,6 +1,10 @@
 package edu.comp373.model.reservations;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.comp373.model.observer.Observer;
 import edu.comp373.model.users.FacilityUser;
 
 public class Reservation implements ReservationInterface {
@@ -10,6 +14,14 @@ public class Reservation implements ReservationInterface {
 	private String faciliyID;
 	private String id; 
 	private FacilityUser facilityuser;
+	
+	private List<Observer> observers = new ArrayList<Observer>();
+	
+	public void notifyAllObservers(){
+	   for (Observer observer : observers) {
+	      observer.update();
+	   }
+	} 
 	
 	/* Constructor for the building before saving to MongoDB */
 	public Reservation(final FacilityUser facilityUser, final LocalDateTime start, final LocalDateTime end, final String facID) {
@@ -30,6 +42,10 @@ public class Reservation implements ReservationInterface {
 	
 	public Reservation() {
 		
+	}
+	
+	public void cancel() {
+		this.notifyAllObservers();
 	}
 	
 	public void setFacility(String id) {
@@ -91,6 +107,11 @@ public class Reservation implements ReservationInterface {
 	 */
 	public void setEnd(LocalDateTime end) {
 		this.end = end;
+	}
+	
+	@Override
+	public void attach(Observer user) {
+		observers.add(user);		
 	}
 	
 }

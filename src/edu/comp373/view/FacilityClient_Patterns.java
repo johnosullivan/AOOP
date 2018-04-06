@@ -1,5 +1,10 @@
 package edu.comp373.view;
 
+import java.time.LocalDateTime;
+
+import edu.comp373.model.maintenance.MaintenanceRequest;
+import edu.comp373.model.maintenance.MaintenanceRequest.MaintenanceStatus;
+import edu.comp373.model.reservations.Reservation;
 import edu.comp373.model.users.FacilityUser;
 import edu.comp373.model.users.Inspector;
 import edu.comp373.model.users.User;
@@ -30,6 +35,28 @@ public class FacilityClient_Patterns {
 		System.out.println(user_bridge_two.getUserFirstName());
 		System.out.println(user_bridge_two.getUserMiddleName());
 		System.out.println(user_bridge_two.getUserLastName());
+		
+		
+		
+		
+		MaintenanceRequest request = new MaintenanceRequest();
+		request.setCost(200.0);
+		request.setProblem("The pipe inside the room in the back broke!!!");
+
+		user_bridge_two.attachToRequest(request);
+		
+		request.setStatus(MaintenanceStatus.COMPLETED);
+		
+		LocalDateTime start = LocalDateTime.now().minusHours(2); 
+        LocalDateTime end = LocalDateTime.now(); 
+        Reservation reversation = new Reservation();
+        reversation.setStart(start);
+        reversation.setEnd(end);
+        
+        user_bridge_one.attachToRequest(reversation);
+        
+        reversation.cancel();
+		
 	}
 	
 }

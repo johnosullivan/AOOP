@@ -1,5 +1,7 @@
 package edu.comp373.model.users;
 
+import edu.comp373.model.observer.Request;
+
 public class User extends UserAbstract {
 
 	public User(UserInterface user) {
@@ -48,6 +50,10 @@ public class User extends UserAbstract {
 	
 	public String saveUser() {
 		return save();
+	}  
+	
+	public void attachUserToRequest(Request subject) {
+		attachToRequest(subject);
 	}
 	
 }

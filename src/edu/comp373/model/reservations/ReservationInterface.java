@@ -2,9 +2,10 @@ package edu.comp373.model.reservations;
 
 import java.time.LocalDateTime;
 
+import edu.comp373.model.observer.Request;
 import edu.comp373.model.users.FacilityUser;
 
-public interface ReservationInterface {
+public interface ReservationInterface extends Request {
 
 	public LocalDateTime getStart();
 	
@@ -25,5 +26,7 @@ public interface ReservationInterface {
 	public void setEnd(LocalDateTime end);
 	
 	public void setFacility(String id);
+	
+	public void cancel();
 	
 }
