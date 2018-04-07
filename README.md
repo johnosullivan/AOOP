@@ -19,17 +19,24 @@ Once those three Jars have been included, the project is ready to run the client
 ```
 mongod --dbpath .
 ```
-; code coverage is at 72%.
+.
 
 ## Clients
 
 -  edu.comp373.view.FacilityClient_WithDAOAccess.java
 -  edu.comp373.view.FacilityClient_WithSpring.java
 -  edu.comp373.view.FacilityClient_WithSpringAndDAO.java
+-  edu.comp373.view.FacilityClient_WithSpringPatterns.java
 
-There are currenlty three clients that interface with the Facility manager system. "FacilityClient_WithDAOAccess" requires a mongoDB session to run on the localhost. "FacilityClient_WithSpring" uses the spring container configuration for dependency injection along with application context. "FacilityClient_WithSpringAndDAO" uses both of the requirements above to operate correctly. The dependency relationship using XML is located at ```META-INF/app-context.xml```
+There are currenlty three clients that interface with the Facility manager system. "FacilityClient_WithDAOAccess" requires a mongoDB session to run on the localhost. "FacilityClient_WithSpring" uses the spring container configuration for dependency injection along with application context. "FacilityClient_WithSpringAndDAO" uses both of the requirements above to operate correctly. "FacilityClient_WithSpringPatterns" uses the spring framework and patterns in a client demo. The dependency relationship using XML is located at ```META-INF/app-context.xml```
 
-## Project Features
+## Patterns
+
+<b>Bridge Pattern</b> - The bridge patterns was used in the project with the different user types like the Inspector and FacilityUser. The bridge pattern allowed for the abstraction and implemention to be designs independently along with the client code to access the abstrct parts with being worried about the concrete implementaion. The implementation of the pattern can be in the following Java source files: <i>FacilityUser.java, Inspector.java, User.java, UserAbstract.java, and UserInterface.java.</i>
+
+<b>Observer Pattern</b> - The observer patterns which is a behavioral pattern was utilized in the bridge to allows users to attach to different Requests (Inspections/MaintenanceRequest/Reservation), to which any changes to the state of said request will notify any of the users (Observers) who are attached to it. This required the modification of the different requests to be abstract so they could be meet the requirements of the Subject in the Observer Pattern. The implementation of the pattern can be in the following Java source files: <i>FacilityUser.java, Inspector.java, User.java, UserAbstract.java, UserInterface.java, Observer.java, InspectionInterface.java, MaintenanceRequestInterface.java, ReservationInterface.java, and Request.java.</i>   
+
+## Features
 
 #### Facility.java
 

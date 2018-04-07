@@ -21,12 +21,16 @@
 	<bean id="facilityuser_id" class="edu.comp373.model.users.FacilityUser" scope="prototype">
 		<constructor-arg name="_id" value=""/>
 	</bean>
-	
+    
 	<bean id="inspector" class="edu.comp373.model.users.Inspector" scope="prototype"/>
 	
 	<bean id="inspector_id" class="edu.comp373.model.users.Inspector" scope="prototype">
 		<constructor-arg name="_id" value=""/>
 	</bean>
+    
+    <bean id="userabstracct" class="edu.comp373.model.users.UserAbstract" scope="prototype"/>
+    
+    <bean id="user" class="edu.comp373.model.users.User" scope="prototype"/>
 	
 	<bean id="address" class="edu.comp373.model.facility.Address" scope="prototype"/>
 		

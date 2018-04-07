@@ -48,12 +48,6 @@ public class Inspector extends Observer {
 	 * (non-Javadoc) Gets the FirstName
 	 * @see edu.comp373.model.users.UserInterface#getFirstName()
 	 */
-	
-	public void attachToRequest(Request subject) {
-		this.subject = subject;
-	    this.subject.attach(this);
-	}
-	
 	@Override
 	public String getFirstName() {
 		return this.firstName;
@@ -130,15 +124,26 @@ public class Inspector extends Observer {
 		this.id = this.usersDAO.addInspector(this);
 		return this.id;
 	}
-	
+	/*
+	 * (non-Javadoc)
+	 * @see edu.comp373.model.users.UserInterface#attachToRequest(edu.comp373.model.observer.Request)
+	 */
+	public void attachToRequest(Request subject) {
+		this.subject = subject;
+	    this.subject.attach(this);
+	}
+	/*
+	 * (non-Javadoc)
+	 * @see edu.comp373.model.observer.Observer#update()
+	 */
 	@Override
 	public void update() {
 		if (this.subject instanceof MaintenanceRequest) {
-			System.out.println("MaintenanceRequest -> Update the request Inspector");
+			System.out.println("Observer MaintenanceRequest -> Update the request Inspector");
 		}
 		
 		if (this.subject instanceof Reservation) {
-			System.out.println("Reservation -> Update the request Inspector");
+			System.out.println("Observer Reservation -> Update the request Inspector");
 		}
 	}
 	

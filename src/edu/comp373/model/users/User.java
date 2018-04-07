@@ -3,7 +3,9 @@ package edu.comp373.model.users;
 import edu.comp373.model.observer.Request;
 
 public class User extends UserAbstract {
-
+	/*
+	 * User
+	 */
 	public User(UserInterface user) {
 		super(user);
 	}

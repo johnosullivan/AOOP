@@ -1,8 +1,11 @@
 package edu.comp373.model.inspections;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import edu.comp373.dal.inspections.InspectionDAO;
+import edu.comp373.model.observer.Observer;
 import edu.comp373.model.users.Inspector;
 
 public class Inspection implements InspectionInterface {
@@ -21,6 +24,13 @@ public class Inspection implements InspectionInterface {
 	
 	public Inspection() { }
 	
+	private List<Observer> observers = new ArrayList<Observer>();
+	
+	public void notifyAllObservers(){
+	   for (Observer observer : observers) {
+	      observer.update();
+	   }
+	} 
 	/*
 	 * Constructor for Inspection in the MongoDB via ID
 	 */
@@ -119,6 +129,11 @@ public class Inspection implements InspectionInterface {
 	 */
 	public LocalDateTime getDateTime() {
 		return this.datetime;
+	}
+
+	@Override
+	public void attach(Observer user) {
+		observers.add(user);		
 	}
 	
 }

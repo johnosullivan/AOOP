@@ -125,18 +125,24 @@ public class FacilityUser extends Observer {
 		this.id = this.usersDAO.addUser(this);
 		return this.id;
 	}
-	
+	/*
+	 * (non-Javadoc)
+	 * @see edu.comp373.model.observer.Observer#update()
+	 */
 	@Override
 	public void update() {
 		if (this.subject instanceof MaintenanceRequest) {
-			System.out.println("MaintenanceRequest -> Update the request FacilityUser");
+			System.out.println("Observer MaintenanceRequest -> Update the request FacilityUser");
 		}
 		
 		if (this.subject instanceof Reservation) {
-			System.out.println("Reservation -> Update the request FacilityUser");
+			System.out.println("Observer Reservation -> Update the request FacilityUser");
 		}
 	}
-	
+	/*
+	 * (non-Javadoc)
+	 * @see edu.comp373.model.users.UserInterface#attachToRequest(edu.comp373.model.observer.Request)
+	 */
 	public void attachToRequest(Request subject) {
 		this.subject = subject;
 	    this.subject.attach(this);
