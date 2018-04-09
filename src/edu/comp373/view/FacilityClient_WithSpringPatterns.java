@@ -20,45 +20,48 @@ public class FacilityClient_WithSpringPatterns {
 		System.out.println("Advanced Object Oriented Programming (OOP) Patterns");
 		Logger.getLogger("org.mongodb.driver").setLevel(Level.SEVERE);
 		ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/app-context.xml");
-		
+		/*
+		 * Bridge Pattern
+		 */
+		// Creates a instance of the user with the implementation facility user
 		User user_bridge_one = (User)context.getBean("user", (FacilityUser)context.getBean("facilityuser"));
 		user_bridge_one.setUserFirstName("John");
 		user_bridge_one.setUserMiddleName("Nikolas");
 		user_bridge_one.setUserLastName("O'Sullivan");
-		
+		// Creates a instance of the user with the implementation inspector
 		User user_bridge_two = (User)context.getBean("user", (Inspector)context.getBean("inspector"));
 		user_bridge_two.setUserFirstName("Rachel");
 		user_bridge_two.setUserMiddleName("Louise");
 		user_bridge_two.setUserLastName("O'Sullivan"); 
-		
+		// Prints details to confirm it is working
 		System.out.println(user_bridge_one.getUserFirstName());
 		System.out.println(user_bridge_one.getUserMiddleName());
 		System.out.println(user_bridge_one.getUserLastName());
-		
 		System.out.println(user_bridge_two.getUserFirstName());
 		System.out.println(user_bridge_two.getUserMiddleName());
 		System.out.println(user_bridge_two.getUserLastName());
-		
+		/*
+		 * Observer Pattern 
+		 */
 		MaintenanceRequest request = (MaintenanceRequest)context.getBean("maintenancerequest");
 		request.setCost(200.0);
 		request.setProblem("The pipe inside the room in the back broke!!!");
-
+		// Attaches the users to the request
 		user_bridge_two.attachToRequest(request);
-		
+		// Changes the status of the request
 		request.setStatus(MaintenanceStatus.COMPLETED);
-		
+		// Creates a reservation 
 		LocalDateTime start = LocalDateTime.now().minusHours(2); 
         LocalDateTime end = LocalDateTime.now(); 
         Reservation reversation = (Reservation)context.getBean("reservation");
         reversation.setStart(start);
         reversation.setEnd(end);
-        
+        // Attaches the users to the request
         user_bridge_one.attachToRequest(reversation);
-        
+        // Changes the status of the reservation
         reversation.cancel();
-        
+        // Closes the spring context
         ((ClassPathXmlApplicationContext) context).close();
-		
 	}
 	
 }
