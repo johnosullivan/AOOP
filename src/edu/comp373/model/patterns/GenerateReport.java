@@ -1,13 +1,27 @@
 package edu.comp373.model.patterns;
 
+import java.time.LocalDateTime;
+
 import edu.comp373.model.inspections.Inspection;
 import edu.comp373.model.maintenance.MaintenanceRequest;
 import edu.comp373.model.reservations.Reservation;
 
 public class GenerateReport implements ReportPartVisitor {
 
-	public GenerateReport() {
-
+	private LocalDateTime start;
+	private LocalDateTime end;
+	
+	public GenerateReport(final LocalDateTime _start, final LocalDateTime _end) {
+		this.start = _start;
+		this.end = _end;
+	}
+	
+	public LocalDateTime getStartDate() {
+		return this.start;
+	}
+	
+	public LocalDateTime getEndDate() {
+		return this.end;
 	}
 	
 	@Override

@@ -19,6 +19,7 @@ public class Report implements Request {
 	
 	@Override
 	public void accept(ReportPartVisitor reportPartVisitor) {
+		
 	   for (int i = 0; i < reporting_parts.length; i++) {
 		   reporting_parts[i].accept(reportPartVisitor);
 	   }
