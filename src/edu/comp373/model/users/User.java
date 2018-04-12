@@ -1,5 +1,6 @@
 package edu.comp373.model.users;
 
+import edu.comp373.model.announcement.Announcement;
 import edu.comp373.model.patterns.AnnouncementMediator;
 import edu.comp373.model.patterns.Request;
 
@@ -63,11 +64,11 @@ public class User extends UserAbstract {
 		attachToRequest(subject);
 	}
 	
-	public void receiveUser(String message) {
-		receive(message);
+	public void receiveUser(Announcement announcement) {
+		receive(announcement);
 	}
 	
-	public void postUser(String message) {
-		post(message);
+	public void postUser(Announcement announcement) {
+		post(announcement);
 	}
 }

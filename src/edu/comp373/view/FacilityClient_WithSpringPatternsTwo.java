@@ -1,5 +1,6 @@
 package edu.comp373.view;
 
+import edu.comp373.model.announcement.Announcement;
 import edu.comp373.model.patterns.AppAnnouncementMediator;
 import edu.comp373.model.patterns.GenerateReport;
 import edu.comp373.model.patterns.Report;
@@ -30,7 +31,12 @@ public class FacilityClient_WithSpringPatternsTwo {
 		mediator.addUser(user_bridge_one);
 		mediator.addUser(user_bridge_two);
 		
-		user_bridge_one.send("hi");
+		
+		Announcement announcement = new Announcement();
+		announcement.setAnnouncement("The second floor power has gone out can someone please fix it!!!");
+		announcement.setAnnouncer(user_bridge_one);
+		
+		user_bridge_one.post(announcement);
 		
 		
 	}

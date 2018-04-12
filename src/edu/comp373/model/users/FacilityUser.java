@@ -3,6 +3,7 @@ package edu.comp373.model.users;
 import com.mongodb.BasicDBObject;
 
 import edu.comp373.dal.users.UsersDAO;
+import edu.comp373.model.announcement.Announcement;
 import edu.comp373.model.maintenance.MaintenanceRequest;
 import edu.comp373.model.patterns.Observer;
 import edu.comp373.model.patterns.Request;
@@ -152,7 +153,9 @@ public class FacilityUser extends Observer {
 	 * @see edu.comp373.model.users.UserInterface#receive(java.lang.String)
 	 */
 	@Override
-	public void receive(String message) {
-		System.out.println(this.getFirstName() + " " + this.getLastName() + " Received -> " + message);
+	public void receive(Announcement announcement) {
+		System.out.println(this.getFirstName() + " " + this.getLastName() + " Received [");
+		System.out.println(announcement.getAnnouncement());
+		System.out.println("] - " + announcement.getAnnouncer().getFirstName() + " " + announcement.getAnnouncer().getLastName());
 	}
 }

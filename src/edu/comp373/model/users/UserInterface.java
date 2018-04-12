@@ -1,5 +1,6 @@
 package edu.comp373.model.users;
 
+import edu.comp373.model.announcement.Announcement;
 import edu.comp373.model.patterns.Request;
 
 public interface UserInterface {
@@ -28,6 +29,6 @@ public interface UserInterface {
 	
 	public void attachToRequest(Request subject);
 	
-	public void receive(String message);
+	public void receive(Announcement announcement);
 	
 }

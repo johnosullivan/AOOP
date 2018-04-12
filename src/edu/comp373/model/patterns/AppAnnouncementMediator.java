@@ -2,6 +2,7 @@ package edu.comp373.model.patterns;
 
 import java.util.*;
 
+import edu.comp373.model.announcement.Announcement;
 import edu.comp373.model.users.User;
 import edu.comp373.model.users.UserAbstract;
 
@@ -17,10 +18,10 @@ public class AppAnnouncementMediator implements AnnouncementMediator {
 		users.add(user);
 	}
 
-	public void post(String message, UserAbstract suser) {
+	public void post(Announcement announcement, UserAbstract suser) {
 	    for(User user: users) {
 	      if(user != suser) {
-	    	  	user.receive(message);
+	    	  	user.receive(announcement);
 	      }
 	    }
 	}

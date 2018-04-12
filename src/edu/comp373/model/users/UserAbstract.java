@@ -1,5 +1,6 @@
 package edu.comp373.model.users;
 
+import edu.comp373.model.announcement.Announcement;
 import edu.comp373.model.patterns.AnnouncementMediator;
 import edu.comp373.model.patterns.Request;
 
@@ -21,8 +22,8 @@ public abstract class UserAbstract {
 		return mediator;
 	}
 	
-	public void send(String message) {
-	    mediator.post(message, this);
+	public void post(Announcement announcement) {
+	    mediator.post(announcement, this);
 	}
 	
 	public void setFirstName(String firstName) {
@@ -73,8 +74,8 @@ public abstract class UserAbstract {
 		user.attachToRequest(subject);
 	}
  
-	public void receive(String message) {
-		user.receive(message);
+	public void receive(Announcement announcement) {
+		user.receive(announcement);
 	}
 	
 }
