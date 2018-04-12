@@ -1,4 +1,4 @@
-package edu.comp373.model.observer;
+package edu.comp373.model.patterns;
 
 import edu.comp373.model.users.UserInterface;
 

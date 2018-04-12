@@ -1,6 +1,6 @@
 package edu.comp373.model.users;
 
-import edu.comp373.model.observer.Request;
+import edu.comp373.model.patterns.Request;
 
 public interface UserInterface {
 
@@ -27,5 +27,7 @@ public interface UserInterface {
 	public String save();
 	
 	public void attachToRequest(Request subject);
+	
+	public void receive(String message);
 	
 }

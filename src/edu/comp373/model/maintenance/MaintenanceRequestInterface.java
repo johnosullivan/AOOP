@@ -2,7 +2,7 @@ package edu.comp373.model.maintenance;
 
 import edu.comp373.model.facility.Facility;
 import edu.comp373.model.maintenance.MaintenanceRequest.MaintenanceStatus;
-import edu.comp373.model.observer.Request;
+import edu.comp373.model.patterns.Request;
 
 public interface MaintenanceRequestInterface extends Request  {
 

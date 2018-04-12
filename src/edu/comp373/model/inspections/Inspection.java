@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.comp373.dal.inspections.InspectionDAO;
-import edu.comp373.model.observer.Observer;
+import edu.comp373.model.patterns.Observer;
+import edu.comp373.model.patterns.ReportPartVisitor;
 import edu.comp373.model.users.Inspector;
 
 public class Inspection implements InspectionInterface {
@@ -134,6 +135,11 @@ public class Inspection implements InspectionInterface {
 	@Override
 	public void attach(Observer user) {
 		observers.add(user);		
+	}
+	
+	@Override
+	public void accept(ReportPartVisitor reportPartVisitor) {
+		reportPartVisitor.visit(this);
 	}
 	
 }

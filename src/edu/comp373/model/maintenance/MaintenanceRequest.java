@@ -6,7 +6,8 @@ import java.util.List;
 
 import edu.comp373.dal.maintenance.MaintenanceDAO;
 import edu.comp373.model.facility.Facility;
-import edu.comp373.model.observer.Observer;
+import edu.comp373.model.patterns.Observer;
+import edu.comp373.model.patterns.ReportPartVisitor;
 
 public class MaintenanceRequest implements MaintenanceRequestInterface {
 
@@ -146,6 +147,11 @@ public class MaintenanceRequest implements MaintenanceRequestInterface {
 	@Override
 	public void attach(Observer user) {
 		observers.add(user);		
+	}
+
+	@Override
+	public void accept(ReportPartVisitor reportPartVisitor) {
+		reportPartVisitor.visit(this);
 	}
 
 }

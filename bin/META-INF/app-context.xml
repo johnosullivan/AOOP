@@ -30,7 +30,9 @@
     
     <bean id="userabstracct" class="edu.comp373.model.users.UserAbstract" scope="prototype"/>
     
-    <bean id="user" class="edu.comp373.model.users.User" scope="prototype"/>
+    <bean id="user" class="edu.comp373.model.users.User" scope="prototype">
+        <constructor-arg name="user" value=""/>
+    </bean>
 	
 	<bean id="address" class="edu.comp373.model.facility.Address" scope="prototype"/>
 		

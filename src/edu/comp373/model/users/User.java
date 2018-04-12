@@ -1,6 +1,7 @@
 package edu.comp373.model.users;
 
-import edu.comp373.model.observer.Request;
+import edu.comp373.model.patterns.AnnouncementMediator;
+import edu.comp373.model.patterns.Request;
 
 public class User extends UserAbstract {
 	/*
@@ -8,6 +9,10 @@ public class User extends UserAbstract {
 	 */
 	public User(UserInterface user) {
 		super(user);
+	}
+	
+	public User(UserInterface user, AnnouncementMediator mediator) {
+		super(user,mediator);
 	}
 	
 	public void setUserFirstName(String firstName) {
@@ -58,4 +63,11 @@ public class User extends UserAbstract {
 		attachToRequest(subject);
 	}
 	
+	public void receiveUser(String message) {
+		receive(message);
+	}
+	
+	public void postUser(String message) {
+		post(message);
+	}
 }

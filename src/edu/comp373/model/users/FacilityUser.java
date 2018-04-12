@@ -4,8 +4,8 @@ import com.mongodb.BasicDBObject;
 
 import edu.comp373.dal.users.UsersDAO;
 import edu.comp373.model.maintenance.MaintenanceRequest;
-import edu.comp373.model.observer.Observer;
-import edu.comp373.model.observer.Request;
+import edu.comp373.model.patterns.Observer;
+import edu.comp373.model.patterns.Request;
 import edu.comp373.model.reservations.Reservation;
 
 public class FacilityUser extends Observer {
@@ -147,5 +147,12 @@ public class FacilityUser extends Observer {
 		this.subject = subject;
 	    this.subject.attach(this);
 	}
-	
+	/*
+	 * (non-Javadoc)
+	 * @see edu.comp373.model.users.UserInterface#receive(java.lang.String)
+	 */
+	@Override
+	public void receive(String message) {
+		System.out.println(this.getFirstName() + " " + this.getLastName() + " Received -> " + message);
+	}
 }

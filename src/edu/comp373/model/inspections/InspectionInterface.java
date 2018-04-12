@@ -2,7 +2,7 @@ package edu.comp373.model.inspections;
 
 import java.time.LocalDateTime;
 
-import edu.comp373.model.observer.Request;
+import edu.comp373.model.patterns.Request;
 import edu.comp373.model.users.Inspector;
 
 public interface InspectionInterface extends Request {

@@ -2,7 +2,7 @@ package edu.comp373.model.reservations;
 
 import java.time.LocalDateTime;
 
-import edu.comp373.model.observer.Request;
+import edu.comp373.model.patterns.Request;
 import edu.comp373.model.users.FacilityUser;
 
 public interface ReservationInterface extends Request {

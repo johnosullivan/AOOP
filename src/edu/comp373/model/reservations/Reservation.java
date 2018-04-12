@@ -4,7 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.comp373.model.observer.Observer;
+import edu.comp373.model.patterns.Observer;
+import edu.comp373.model.patterns.ReportPartVisitor;
 import edu.comp373.model.users.FacilityUser;
 
 public class Reservation implements ReservationInterface {
@@ -112,6 +113,11 @@ public class Reservation implements ReservationInterface {
 	@Override
 	public void attach(Observer user) {
 		observers.add(user);		
+	}
+
+	@Override
+	public void accept(ReportPartVisitor reportPartVisitor) {
+		reportPartVisitor.visit(this);
 	}
 	
 }

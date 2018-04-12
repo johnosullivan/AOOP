@@ -1,13 +1,28 @@
 package edu.comp373.model.users;
 
-import edu.comp373.model.observer.Request;
+import edu.comp373.model.patterns.AnnouncementMediator;
+import edu.comp373.model.patterns.Request;
 
 public abstract class UserAbstract {
 
 	private UserInterface user;
+	private AnnouncementMediator mediator;
  
 	public UserAbstract(UserInterface user){
 		this.user = user;
+	}
+	
+	public UserAbstract(UserInterface user, AnnouncementMediator mediator){
+		this.user = user;
+		this.mediator = mediator;
+	}
+	
+	public AnnouncementMediator getMediator() {
+		return mediator;
+	}
+	
+	public void send(String message) {
+	    mediator.post(message, this);
 	}
 	
 	public void setFirstName(String firstName) {
@@ -58,5 +73,8 @@ public abstract class UserAbstract {
 		user.attachToRequest(subject);
 	}
  
+	public void receive(String message) {
+		user.receive(message);
+	}
 	
 }
