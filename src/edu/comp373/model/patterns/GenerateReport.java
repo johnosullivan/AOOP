@@ -11,6 +11,11 @@ public class GenerateReport implements ReportPartVisitor {
 	private LocalDateTime start;
 	private LocalDateTime end;
 	
+	private MaintenanceRequest maintenanceRequest;
+	private Inspection inspection;
+	private Reservation reservation;
+	private Report report;
+	
 	public GenerateReport(final LocalDateTime _start, final LocalDateTime _end) {
 		this.start = _start;
 		this.end = _end;
@@ -26,22 +31,29 @@ public class GenerateReport implements ReportPartVisitor {
 	
 	@Override
 	public void visit(MaintenanceRequest maintenanceRequest) {
-		System.out.println("MaintenanceRequest");
+		this.maintenanceRequest = maintenanceRequest;
 	}
 
 	@Override
 	public void visit(Inspection inspection) {
-		System.out.println("Inspection");
+		this.inspection = inspection;
 	}
 
 	@Override
 	public void visit(Reservation reservation) {
-		System.out.println("Reservation");
+		this.reservation = reservation;
 	}
 
 	@Override
 	public void visit(Report report) {
-		System.out.println("Report");
+		this.report = report;
+	}
+	
+	public void printReport() {
+		System.out.println(maintenanceRequest);
+		System.out.println(inspection);
+		System.out.println(reservation);
+		System.out.println(report);
 	}
 
 }

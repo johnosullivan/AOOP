@@ -30,8 +30,30 @@
     
     <bean id="userabstracct" class="edu.comp373.model.users.UserAbstract" scope="prototype"/>
     
+    <bean id="announcementmediator" class="edu.comp373.model.patterns.AnnouncementMediator" scope="prototype"/>
+    
+    <bean id="appannouncementmediator" class="edu.comp373.model.patterns.AppAnnouncementMediator" scope="prototype"/>
+    
+    <bean id="generatereport" class="edu.comp373.model.patterns.GenerateReport" scope="prototype">
+        <constructor-arg name="_start" value=""/>
+        <constructor-arg name="_end" value=""/>
+    </bean>
+    
+    <bean id="reportpartvisitor" class="edu.comp373.model.patterns.ReportPartVisitor" scope="prototype"/>
+    
+    <bean id="request" class="edu.comp373.model.patterns.Request" scope="prototype"/>
+    
+    <bean id="report" class="edu.comp373.model.patterns.Report" scope="prototype"/>
+    
+    <bean id="announcement" class="edu.comp373.model.announcement.Announcement" scope="prototype"/>
+    
     <bean id="user" class="edu.comp373.model.users.User" scope="prototype">
         <constructor-arg name="user" value=""/>
+    </bean>
+    
+    <bean id="usermediator" class="edu.comp373.model.users.User" scope="prototype">
+        <constructor-arg name="user" value=""/>
+        <constructor-arg name="mediator" value=""/>
     </bean>
 	
 	<bean id="address" class="edu.comp373.model.facility.Address" scope="prototype"/>

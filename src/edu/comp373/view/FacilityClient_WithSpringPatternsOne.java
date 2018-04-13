@@ -17,19 +17,19 @@ import edu.comp373.model.users.User;
 public class FacilityClient_WithSpringPatternsOne {
 
 	public static void main(String[] args) {
-		System.out.println("Advanced Object Oriented Programming (OOP) Patterns");
+		System.out.println("Advanced Object Oriented Programming (OOP) Patterns One");
 		Logger.getLogger("org.mongodb.driver").setLevel(Level.SEVERE);
 		ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/app-context.xml");
 		/*
 		 * Bridge Pattern
 		 */
 		// Creates a instance of the user with the implementation facility user
-		User user_bridge_one = (User)context.getBean("user", (FacilityUser)context.getBean("facilityuser"));
+		final User user_bridge_one = (User)context.getBean("user", (FacilityUser)context.getBean("facilityuser"));
 		user_bridge_one.setUserFirstName("John");
 		user_bridge_one.setUserMiddleName("Nikolas");
 		user_bridge_one.setUserLastName("O'Sullivan");
 		// Creates a instance of the user with the implementation inspector
-		User user_bridge_two = (User)context.getBean("user", (Inspector)context.getBean("inspector"));
+		final User user_bridge_two = (User)context.getBean("user", (Inspector)context.getBean("inspector"));
 		user_bridge_two.setUserFirstName("Rachel");
 		user_bridge_two.setUserMiddleName("Louise");
 		user_bridge_two.setUserLastName("O'Sullivan"); 

@@ -36,7 +36,13 @@ There are currenlty three clients that interface with the Facility manager syste
 
 <b>Observer Pattern</b> - The observer patterns, which are behavioral patterns, were utilized in the bridge to allow users to attach to different Requests (Inspections/MaintenanceRequest/Reservation), in which any changes to the state of said request will notify any of the users (Observers) who are attached to it. This required the modification of the different requests to be abstract so they could meet the requirements of the Subject in the Observer Pattern. The observer patterns solve the problem of having the Users knowing when Request is updated in state. The implementation of the pattern can be found in the following Java source files: <i>FacilityUser.java, Inspector.java, User.java, UserAbstract.java, UserInterface.java, Observer.java, InspectionInterface.java, MaintenanceRequestInterface.java, ReservationInterface.java, and Request.java.</i>    
 
-<b>FacilityClient_WithSpringPatterns</b> - The demo will begin with two users using the concrete implementaion of Inspector and FacilityUser. Next, two requests are going to get instances from the spring getBean method. The two different users then attach to the request, where the request will retain all the observers (aka Users). Once the requests are updated it will ```notifyAllObservers``` and print an update message from the concrete user implemention.
+<b>FacilityClient_WithSpringPatternsOne</b> - The demo will begin with two users using the concrete implementaion of Inspector and FacilityUser. Next, two requests are going to get instances from the spring getBean method. The two different users then attach to the request, where the request will retain all the observers (aka Users). Once the requests are updated it will ```notifyAllObservers``` and print an update message from the concrete user implemention.
+
+<b>Visitor Pattern</b> - 
+
+<b>Mediator Pattern</b> - 
+
+<b>FacilityClient_WithSpringPatternsTwo</b> -
 
 ## Features
 

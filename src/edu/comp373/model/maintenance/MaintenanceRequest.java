@@ -151,6 +151,8 @@ public class MaintenanceRequest implements MaintenanceRequestInterface {
 
 	@Override
 	public void accept(ReportPartVisitor reportPartVisitor) {
+		
+		
 		reportPartVisitor.visit(this);
 	}
 
