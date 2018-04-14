@@ -16,7 +16,7 @@ import edu.comp373.model.users.FacilityUser;
 import edu.comp373.model.users.Inspector;
 import edu.comp373.model.users.User;
 
-public class FacilityClient_WithSpringPatternsTwo {
+public class FacilityClient_WithSpringPatternsTwo { 
 
 	public static void main(String[] args) {
 		System.out.println("Advanced Object Oriented Programming (OOP) Patterns Two");
