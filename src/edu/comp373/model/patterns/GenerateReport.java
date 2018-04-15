@@ -50,10 +50,13 @@ public class GenerateReport implements ReportPartVisitor {
 	}
 	
 	public void printReport() {
+		System.out.println("***************** Visitor Pattern Generate Report ******************");
 		System.out.println(maintenanceRequest);
 		System.out.println(inspection);
 		System.out.println(reservation);
 		System.out.println(report);
+		System.out.println("***************** Generate Report End ******************************");
+		
 	}
 
 }

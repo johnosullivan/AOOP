@@ -7,6 +7,7 @@
 - MongoDB - <a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/">Install Here</a>
 - Java 8 <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">Install Here</a>
 - JUnit 4.+ <a href="https://github.com/junit-team/junit4/wiki/getting-started">Install Here</a>
+- Spring 4.+ <a href="https://projects.spring.io/spring-framework/">Install Here</a>
 
 After importing the project into Eclipse, navigate to the "Project Properties" and then to Java libraries. Next, click on "Add External Jars," and within the project root directory is a folder labeled "jars" which contains all the mongo drivers to connect and make a query in Java. Import the following:
 
@@ -26,7 +27,8 @@ mongod --dbpath .
 -  edu.comp373.view.FacilityClient_WithDAOAccess.java
 -  edu.comp373.view.FacilityClient_WithSpring.java
 -  edu.comp373.view.FacilityClient_WithSpringAndDAO.java
--  edu.comp373.view.FacilityClient_WithSpringPatterns.java
+-  edu.comp373.view.FacilityClient_WithSpringPatternsOne.java
+-  edu.comp373.view.FacilityClient_WithSpringPatternsTwo.java
 
 There are currenlty three clients that interface with the Facility manager system. "FacilityClient_WithDAOAccess" requires a mongoDB session to run on the localhost. "FacilityClient_WithSpring" uses the spring container configuration for dependency injection along with application context. "FacilityClient_WithSpringAndDAO" uses both of the requirements above to operate correctly. "FacilityClient_WithSpringPatterns" uses the spring framework and patterns in a client demo. The dependency relationship using XML is located at ```META-INF/app-context.xml```
 

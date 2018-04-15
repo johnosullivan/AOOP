@@ -23,15 +23,17 @@ public class FacilityClient_WithSpringPatternsTwo {
 		Logger.getLogger("org.mongodb.driver").setLevel(Level.SEVERE);
 		ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/app-context.xml");
 		// Gets a instance of the report of from the bean
+		System.out.println("=> Visitor Pattern");
 		Request report = (Report)context.getBean("report");
 		// Creates a time frame
 		LocalDateTime start = LocalDateTime.now().minusHours(2); 
-        LocalDateTime end = LocalDateTime.now();
+        LocalDateTime end = LocalDateTime.now(); 
         // Generate a report by visiting the different request objects 
 		GenerateReport genreport = (GenerateReport)context.getBean("generatereport", start, end);
 		report.accept(genreport);
 		// Prints the report that has been generated 
 		genreport.printReport();
+		System.out.println("=> Mediator Pattern");
 		// Gets a instance of the mediator for the user's announcement board. 
 		AppAnnouncementMediator mediator = (AppAnnouncementMediator)context.getBean("appannouncementmediator");
 		// Creates the first user to the mediator
